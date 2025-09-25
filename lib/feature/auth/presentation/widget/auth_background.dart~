@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../core/config/theme/app_colors.dart';
+
+class AuthBackground extends StatelessWidget {
+  final Widget child;
+  final double? bottomPadding;
+
+  const AuthBackground({super.key, required this.child, this.bottomPadding});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+            bottom: bottomPadding ?? 0.0,
+            child: DecoratedBox(
+                decoration:
+                    BoxDecoration(gradient: AppColors.kGradiantOnboarding))),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            width: double.infinity,
+            child: SvgPicture.asset(
+                height: 80.h,
+                fit: BoxFit.fill,
+                'assets/background/onboard_bottom_curve.svg'),
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+}

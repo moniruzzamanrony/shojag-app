@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "884272254964",
+    "project_id": "shojag-3ae16",
+    "storage_bucket": "shojag-3ae16.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884272254964:android:b143e884f2363e974a73a1",
+        "android_client_info": {
+          "package_name": "com.shojag.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwwNFQRCRRf32tU2XDdwbKMnKRcR7m-2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

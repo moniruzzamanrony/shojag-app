@@ -1,0 +1,27 @@
+class AlertResponseRemotePostModel {
+  int alertId;
+  int responderUserId;
+  String? message;
+
+  AlertResponseRemotePostModel({
+    required this.alertId,
+    required this.responderUserId,
+    this.message,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'alert_id': alertId,
+      'response_id': responderUserId,
+      'message': message,
+    };
+  }
+
+  factory AlertResponseRemotePostModel.fromMap(Map<String, dynamic> map) {
+    return AlertResponseRemotePostModel(
+      alertId: map['alert_id'] as int,
+      responderUserId: map['response_id'] as int,
+      message: map['message'] as String,
+    );
+  }
+}

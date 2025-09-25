@@ -1,0 +1,153 @@
+class ProfilePictureUpdateRemoteResponseModel {
+  ProfilePictureUpdateRemoteResponseModel({
+      this.success, 
+      this.data, 
+      this.message,});
+
+  ProfilePictureUpdateRemoteResponseModel.fromJson(dynamic json) {
+    success = json['success'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    message = json['message'];
+  }
+  bool? success;
+  Data? data;
+  String? message;
+ProfilePictureUpdateRemoteResponseModel copyWith({  bool? success,
+  Data? data,
+  String? message,
+}) => ProfilePictureUpdateRemoteResponseModel(  success: success ?? this.success,
+  data: data ?? this.data,
+  message: message ?? this.message,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['success'] = success;
+    if (data != null) {
+      map['data'] = data?.toJson();
+    }
+    map['message'] = message;
+    return map;
+  }
+
+}
+
+class Data {
+  Data({
+      this.id, 
+      this.type, 
+      this.firstName, 
+      this.lastName, 
+      this.email, 
+      this.phone, 
+      this.dob, 
+      this.nid, 
+      this.profilePic, 
+      this.address, 
+      this.gender, 
+      this.otp, 
+      this.expiresAt, 
+      this.emailVerifiedAt, 
+      this.deviceToken, 
+      this.createdAt, 
+      this.updatedAt, 
+      this.deletedAt,});
+
+  Data.fromJson(dynamic json) {
+    id = json['id'];
+    type = json['type'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    email = json['email'];
+    phone = json['phone'];
+    dob = json['dob'];
+    nid = json['nid'];
+    profilePic = json['profile_pic'];
+    address = json['address'];
+    gender = json['gender'];
+    otp = json['otp'];
+    expiresAt = json['expires_at'];
+    emailVerifiedAt = json['email_verified_at'];
+    deviceToken = json['device_token'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
+  }
+  num? id;
+  String? type;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? phone;
+  String? dob;
+  dynamic nid;
+  String? profilePic;
+  dynamic address;
+  dynamic gender;
+  dynamic otp;
+  String? expiresAt;
+  dynamic emailVerifiedAt;
+  dynamic deviceToken;
+  String? createdAt;
+  String? updatedAt;
+  dynamic deletedAt;
+Data copyWith({  num? id,
+  String? type,
+  String? firstName,
+  String? lastName,
+  String? email,
+  String? phone,
+  String? dob,
+  dynamic nid,
+  String? profilePic,
+  dynamic address,
+  dynamic gender,
+  dynamic otp,
+  String? expiresAt,
+  dynamic emailVerifiedAt,
+  dynamic deviceToken,
+  String? createdAt,
+  String? updatedAt,
+  dynamic deletedAt,
+}) => Data(  id: id ?? this.id,
+  type: type ?? this.type,
+  firstName: firstName ?? this.firstName,
+  lastName: lastName ?? this.lastName,
+  email: email ?? this.email,
+  phone: phone ?? this.phone,
+  dob: dob ?? this.dob,
+  nid: nid ?? this.nid,
+  profilePic: profilePic ?? this.profilePic,
+  address: address ?? this.address,
+  gender: gender ?? this.gender,
+  otp: otp ?? this.otp,
+  expiresAt: expiresAt ?? this.expiresAt,
+  emailVerifiedAt: emailVerifiedAt ?? this.emailVerifiedAt,
+  deviceToken: deviceToken ?? this.deviceToken,
+  createdAt: createdAt ?? this.createdAt,
+  updatedAt: updatedAt ?? this.updatedAt,
+  deletedAt: deletedAt ?? this.deletedAt,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['type'] = type;
+    map['first_name'] = firstName;
+    map['last_name'] = lastName;
+    map['email'] = email;
+    map['phone'] = phone;
+    map['dob'] = dob;
+    map['nid'] = nid;
+    map['profile_pic'] = profilePic;
+    map['address'] = address;
+    map['gender'] = gender;
+    map['otp'] = otp;
+    map['expires_at'] = expiresAt;
+    map['email_verified_at'] = emailVerifiedAt;
+    map['device_token'] = deviceToken;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
+    map['deleted_at'] = deletedAt;
+    return map;
+  }
+
+}

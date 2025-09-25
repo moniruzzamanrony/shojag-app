@@ -1,0 +1,4 @@
+class UserLocationUpdateRemotePostModel {
+  int userId;
+  
+}

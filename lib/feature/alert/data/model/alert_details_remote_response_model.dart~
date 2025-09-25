@@ -1,0 +1,191 @@
+class AlertDetailsRemoteResponseModel {
+  AlertDetailsRemoteResponseModel({
+      this.success, 
+      this.message, 
+      this.alert, 
+      this.responseList,});
+
+  AlertDetailsRemoteResponseModel.fromJson(dynamic json) {
+    success = json['success'];
+    message = json['message'];
+    alert = json['alert'] != null ? Alert.fromJson(json['alert']) : null;
+    if (json['response_list'] != null) {
+      responseList = [];
+      json['response_list'].forEach((v) {
+        responseList?.add(ResponseList.fromJson(v));
+      });
+    }
+  }
+  bool? success;
+  String? message;
+  Alert? alert;
+  List<ResponseList>? responseList;
+AlertDetailsRemoteResponseModel copyWith({  bool? success,
+  String? message,
+  Alert? alert,
+  List<ResponseList>? responseList,
+}) => AlertDetailsRemoteResponseModel(  success: success ?? this.success,
+  message: message ?? this.message,
+  alert: alert ?? this.alert,
+  responseList: responseList ?? this.responseList,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['success'] = success;
+    map['message'] = message;
+    if (alert != null) {
+      map['alert'] = alert?.toJson();
+    }
+    if (responseList != null) {
+      map['response_list'] = responseList?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+class ResponseList {
+  ResponseList({
+      this.userName, 
+      this.responseMessage, 
+      this.responderId, 
+      this.profileImage, 
+      this.createdAt, 
+      this.updatedAt,});
+
+  ResponseList.fromJson(dynamic json) {
+    userName = json['user_name'];
+    responseMessage = json['response_message'];
+    responderId = json['responder_id'];
+    profileImage = json['profile_image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+  String? userName;
+  String? responseMessage;
+  num? responderId;
+  String? profileImage;
+  String? createdAt;
+  String? updatedAt;
+ResponseList copyWith({  String? userName,
+  String? responseMessage,
+  num? responderId,
+  String? profileImage,
+  String? createdAt,
+  String? updatedAt,
+}) => ResponseList(  userName: userName ?? this.userName,
+  responseMessage: responseMessage ?? this.responseMessage,
+  responderId: responderId ?? this.responderId,
+  profileImage: profileImage ?? this.profileImage,
+  createdAt: createdAt ?? this.createdAt,
+  updatedAt: updatedAt ?? this.updatedAt,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['user_name'] = userName;
+    map['response_message'] = responseMessage;
+    map['responder_id'] = responderId;
+    map['profile_image'] = profileImage;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
+    return map;
+  }
+
+}
+
+class Alert {
+  Alert({
+      this.id, 
+      this.userId, 
+      this.userName, 
+      this.categoryIds, 
+      this.incidentTitle, 
+      this.description, 
+      this.latitude, 
+      this.longitude, 
+      this.distance, 
+      this.address, 
+      this.geoAddress, 
+      this.image, 
+      this.status, 
+      this.createdAt,});
+
+  Alert.fromJson(dynamic json) {
+    id = json['id'];
+    userId = json['user_id'];
+    userName = json['user_name'];
+    categoryIds = json['category_ids'];
+    incidentTitle = json['incident_title'];
+    description = json['description'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    distance = json['distance'];
+    address = json['address'];
+    geoAddress = json['geo_address'];
+    image = json['image'];
+    status = json['status'];
+    createdAt = json['created_at'];
+  }
+  num? id;
+  num? userId;
+  String? userName;
+  String? categoryIds;
+  String? incidentTitle;
+  String? description;
+  num? latitude;
+  num? longitude;
+  num? distance;
+  String? address;
+  String? geoAddress;
+  String? image;
+  num? status;
+  String? createdAt;
+Alert copyWith({  num? id,
+  num? userId,
+  String? userName,
+  String? categoryIds,
+  String? incidentTitle,
+  String? description,
+  num? latitude,
+  num? longitude,
+  num? distance,
+  String? address,
+  String? geoAddress,
+  String? image,
+  num? status,
+  String? createdAt,
+}) => Alert(  id: id ?? this.id,
+  userId: userId ?? this.userId,
+  userName: userName ?? this.userName,
+  categoryIds: categoryIds ?? this.categoryIds,
+  incidentTitle: incidentTitle ?? this.incidentTitle,
+  description: description ?? this.description,
+  latitude: latitude ?? this.latitude,
+  longitude: longitude ?? this.longitude,
+  distance: distance ?? this.distance,
+  address: address ?? this.address,
+  geoAddress: geoAddress ?? this.geoAddress,
+  image: image ?? this.image,
+  status: status ?? this.status,
+  createdAt: createdAt ?? this.createdAt,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = id;
+    map['user_id'] = userId;
+    map['user_name'] = userName;
+    map['category_ids'] = categoryIds;
+    map['incident_title'] = incidentTitle;
+    map['description'] = description;
+    map['latitude'] = latitude;
+    map['longitude'] = longitude;
+    map['distance'] = distance;
+    map['address'] = address;
+    map['geo_address'] = geoAddress;
+    map['image'] = image;
+    map['status'] = status;
+    map['created_at'] = createdAt;
+    return map;
+  }
+
+}

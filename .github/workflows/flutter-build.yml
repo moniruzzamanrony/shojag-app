@@ -1,0 +1,102 @@
+name: Flutter Build
+
+
+on:
+  workflow_dispatch: # manual action trigger
+#on:
+#  push:
+#    branches:
+#      - main  # or any other branch you want to build on push
+#  pull_request:
+#    branches:
+#      - main  # or any other branch you want to build on PR
+
+jobs:
+  # Android build job
+  android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Update to the latest version
+
+      # Set up JDK 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Set up Flutter SDK
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.35.6'  # Specify the exact stable version here
+
+      # Accept Android SDK Licenses
+      - name: Accept Android Licenses
+        run: yes | flutter doctor --android-licenses
+
+      # Run Flutter pub get to fetch dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Android build step
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      # Save APK as build artifact
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4  # Updated to v4
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+# ----------------
+
+  # iOS build job
+#  ios:
+#    name: Build iOS IPA
+#    runs-on: macos-latest
+#
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '17'
+#          distribution: 'adopt'
+#
+#      - name: Set up Flutter
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.24.1'
+#
+#      # Run Flutter Pub Get to install dependencies and generate the Podfile correctly
+#      - name: Install Flutter dependencies
+#        run: flutter pub get
+#
+#      - name: Install CocoaPods
+#        run: |
+#          sudo gem install cocoapods
+#          pod repo update
+#
+#      - name: Run Pod Install
+#        run: cd ios && pod install
+#
+#      - name: Build iOS IPA
+#        run: flutter build ipa --release --no-codesign -v
+#
+#      - name: Check IPA output
+#        run: ls build/ios/ipa
+#
+#      - name: Upload iOS IPA
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: ios-ipa
+#          path: build/ios/ipa/*.ipa
+#          if-no-files-found: warn

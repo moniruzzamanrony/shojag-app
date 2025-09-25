@@ -1,0 +1,138 @@
+import 'package:app/core/utils/extension/context_extension.dart';
+import 'package:app/core/utils/extension/number_extension.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_button_widget.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_email_widget.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_name_widget.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_organization_widget.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_password_widget.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_phone_widget.dart';
+import 'package:app/feature/auth/presentation/page/registration/reg_repeat_password_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+
+import '../../../widget/terms_and_condition_widget.dart';
+
+class FormAmbulanceReg extends StatefulWidget {
+  const FormAmbulanceReg({super.key});
+
+  @override
+  State<FormAmbulanceReg> createState() => _FormAmbulanceRegState();
+}
+
+class _FormAmbulanceRegState extends State<FormAmbulanceReg> {
+  late final GlobalKey<FormState> _formKey;
+  late final TextEditingController _firstNameController;
+
+  late final TextEditingController _lastNameController;
+
+  late final TextEditingController _organizationController;
+
+  late final TextEditingController _emailController;
+
+  late final TextEditingController _phoneController;
+
+  late final TextEditingController _passwordController;
+
+  late final TextEditingController _repeatPasswordController;
+
+  late final TextEditingController _policeIdController;
+
+  @override
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _organizationController = TextEditingController();
+    _phoneController = TextEditingController();
+    _passwordController = TextEditingController();
+    _repeatPasswordController = TextEditingController();
+    _policeIdController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _organizationController.dispose();
+    _passwordController.dispose();
+    _repeatPasswordController.dispose();
+    _policeIdController.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final int interval = 120;
+    final int period = 30;
+    final duration = Duration(milliseconds: interval);
+    final delay0 = Duration(milliseconds: interval * 0);
+    final delay1 = Duration(milliseconds: interval * 1 - (period * 1));
+    final delay2 = Duration(milliseconds: interval * 2 - (period * 2));
+    final delay3 = Duration(milliseconds: interval * 3 - (period * 3));
+    final delay4 = Duration(milliseconds: interval * 4 - (period * 4));
+    final delay5 = Duration(milliseconds: interval * 5 - (period * 5));
+    final delay6 = Duration(milliseconds: interval * 6 - (period * 6));
+
+    List<Effect<dynamic>>? effects = [
+      SlideEffect(
+          duration: duration, begin:  const Offset(0.0, -0.2), end: Offset.zero),
+      FadeEffect(duration: duration),
+    ];
+
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          RegNameWidget(
+                  firstNameController: _firstNameController,
+                  lastNameController: _lastNameController)
+              .animate(key: UniqueKey(), delay: delay0, effects: effects),
+          _itemSeparator(),
+          RegOrganizationWidget(
+            organizationController: _organizationController,
+            hintText: context.language.hospitalAgency,
+          ).animate(key: UniqueKey(), delay: delay1, effects: effects),
+          _itemSeparator(),
+          RegEmailWidget(emailController: _emailController)
+              .animate(key: UniqueKey(), delay: delay1, effects: effects),
+          _itemSeparator(),
+          RegPhoneWidget(
+            phoneController: _phoneController,
+          ).animate(key: UniqueKey(), delay: delay2, effects: effects),
+          _itemSeparator(),
+          RegPasswordWidget(passwordController: _passwordController)
+              .animate(key: UniqueKey(), delay: delay3, effects: effects),
+          _itemSeparator(),
+          RegRepeatPasswordWidget(
+                  passwordController: _passwordController,
+                  repeatPasswordController: _repeatPasswordController)
+              .animate(key: UniqueKey(), delay: delay4, effects: effects),
+          _itemSeparator(),
+          const TermsAndConditionWidget().animate(
+            delay: delay5,
+            effects: effects,
+            key: UniqueKey(),
+          ),
+          _itemSeparator(),
+          RegButtonWidget(
+                  formKey: _formKey,
+                  emailController: _emailController,
+                  policeIdController: _policeIdController,
+                  organizationController: _organizationController,
+                  passwordController: _passwordController,
+                  firstNameController: _firstNameController,
+                  lastNameController: _lastNameController,
+                  phoneController: _phoneController)
+              .animate(key: UniqueKey(), delay: delay5, effects: effects)
+        ],
+      ),
+    );
+  }
+
+  Widget _itemSeparator() => 12.gapH;
+}

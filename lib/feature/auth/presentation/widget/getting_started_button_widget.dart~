@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svgProvider;
+
+import '../../../../core/config/theme/app_colors.dart';
+
+class GettingStartedButtonWidget extends StatelessWidget {
+  final String buttonText;
+  final void Function() onPressed;
+
+  const GettingStartedButtonWidget({
+    super.key,
+    required this.buttonText,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.circular(10.r);
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(borderRadius: borderRadius)),
+      child: Ink(
+        height: 48.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          image: DecorationImage(
+              image: svgProvider.Svg(
+                  'assets/background/button_background_red.svg'),
+              fit: BoxFit.cover),
+        ),
+        child: Text(
+          buttonText,
+          style: TextStyle(
+              fontSize: 16.sp,
+              height: 1,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}

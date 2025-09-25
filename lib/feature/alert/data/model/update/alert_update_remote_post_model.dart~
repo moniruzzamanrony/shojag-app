@@ -1,0 +1,43 @@
+class AlertUpdateRemotePostModel {
+  final int userId;
+  final int alertId;
+  final String description;
+  final double latitude;
+  final double longitude;
+  final String? address;
+  final String? geoAddress;
+
+  const AlertUpdateRemotePostModel({
+    required this.userId,
+    required this.alertId,
+    required this.description,
+    required this.latitude,
+    required this.longitude,
+    this.address,
+    this.geoAddress,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'user_id': this.userId,
+      'alert_id': this.alertId,
+      'description': this.description,
+      'latitude': this.latitude,
+      'longitude': this.longitude,
+      'address': this.address,
+      'geo_address': this.geoAddress,
+    };
+  }
+
+  factory AlertUpdateRemotePostModel.fromMap(Map<String, dynamic> map) {
+    return AlertUpdateRemotePostModel(
+      userId: map['user_id'] as int,
+      alertId: map['alert_id'] as int,
+      description: map['description'] as String,
+      latitude: map['latitude'] as double,
+      longitude: map['longitude'] as double,
+      address: map['address'] as String,
+      geoAddress: map['geo_address'] as String,
+    );
+  }
+}

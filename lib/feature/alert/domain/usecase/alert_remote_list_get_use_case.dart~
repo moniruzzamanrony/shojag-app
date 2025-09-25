@@ -1,0 +1,76 @@
+import 'package:app/core/utils/enums/alert_status.dart';
+import 'package:app/core/utils/enums/alert_type.dart';
+import 'package:app/core/utils/helper/datetime_helper.dart';
+import 'package:app/feature/alert/domain/entity/alert_entity.dart';
+import 'package:app/feature/alert/domain/repository/alert_repository.dart';
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/model/alert_list_remote_response_model.dart';
+
+class GetAlertRemoteListUseCase
+    extends UseCase<List<AlertEntity>, GetAlertRemoteListParam> {
+  final AlertRepository repository;
+
+  GetAlertRemoteListUseCase(this.repository);
+
+  @override
+  Future<Either<Failure, List<AlertEntity>>> call(
+      GetAlertRemoteListParam params) async {
+    final response = await repository.getAlertListRemote(
+      token: params.token,
+    );
+    return await response.fold(
+      (l) {
+        return Left(l);
+      },
+      (r) async {
+        if (r.success == true) {
+          final itemList = r.data ?? <Data>[];
+          final entityList = itemList
+              .map(
+                (e) => AlertEntity(
+                  id: e.id ?? 0,
+                  userId: int.tryParse(e.userId ?? '') ?? 0,
+                  userName: e.userName ?? '',
+                  alertCategories: e.categoryIds
+                          ?.split(',')
+                          .map(
+                            (el) => AlertType.fromId(int.tryParse(el) ?? 0),
+                          )
+                          .where(
+                            (t) => t != AlertType.none,
+                          )
+                          .toList() ??
+                      [],
+                  incidentTitle: e.incidentTitle ?? '',
+                  description: e.description,
+                  address: e.address,
+                  geoAddress: e.geoAddress,
+                  image: e.image,
+                  video: e.video,
+                  status: AlertStatus.fromId(int.tryParse(e.status ?? '') ?? 0),
+                  latitude: double.tryParse(e.latitude ?? '') ?? 0,
+                  longitude: double.tryParse(e.longitude ?? '') ?? 0,
+                  createdAt: getDateTimeFromString(date: e.createdAt),
+                  updatedAt: getDateTimeFromString(date: e.updatedAt),
+                ),
+              )
+              .toList();
+
+          return Right(entityList);
+        }
+        return Left(ServerFailure(r.message ?? ''));
+      },
+    );
+  }
+}
+
+class GetAlertRemoteListParam {
+  String token;
+
+  GetAlertRemoteListParam({
+    required this.token,
+  });
+}

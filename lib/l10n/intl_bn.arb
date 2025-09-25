@@ -1,0 +1,522 @@
+{
+  "@@locale": "bn",
+  "@@Common": "---------------Common---------------",
+  "app_title": "সজাগ",
+  "citizen": "সিটিজেন",
+  "community": "কমিউনিটি",
+  "police": "পুলিশ",
+  "ambulance": "আম্বুলেন্স",
+  "fire_service": "ফায়ার সার্ভিস",
+  "ok": "ওকে",
+  "cancel": "বাতিল",
+  "search": "অনুসন্ধান",
+  "@@Getting Started Page": "---------------Getting Started Page---------------",
+  "get_started": "শুরু করুন",
+  "yourLifeLIneInEmergencies": "জরুরি সময়ে আপনার প্রিয় সাথী, আপনার পাশেই",
+  "togetherWeConnectTogetherWeProtect": "সংযোগেই  সুরক্ষা",
+  "@@Login Page": "---------------Login Page---------------",
+  "login": "লগইন",
+  "email": "ইমেইল",
+  "password": "পাসওয়ার্ড",
+  "forgot_password": "পাসওয়ার্ড ভুলে গেছেন?",
+  "notAMember": "অ্যাকাউন্ট নেই?",
+  "joinNow": "যোগ দিন",
+  "@@Sign Up Page": "---------------Sign Up Page---------------",
+  "registration": "রেজিস্ট্রেশন",
+  "selectHowYouWantToJoinWith": "কিভাবে যোগ দিতে চান?",
+  "firstName": "প্রথম নাম",
+  "lastName": "শেষ নাম",
+  "phone": "ফোন",
+  "policeId": "পুলিশ আইডি",
+  "organization": "সংস্থা",
+  "gender": "লিঙ্গ",
+  "dateOfBirth": "জন্ম তারিখ",
+  "dob": "জন্ম তারিখ",
+  "nid": "এন আই ডি",
+  "address": "ঠিকানা",
+  "male": "পুরুষ",
+  "female": "মহিলা",
+  "other": "অন্যান্য",
+  "thana": "থানা",
+  "selectThana": "থানা নির্বাচন করুন",
+  "fireStation": "ফায়ার স্টেশন",
+  "hospitalAgency": "হাসপাতাল/এজেন্সি",
+  "district": "জেলা",
+  "selectDistrict": "জেলা নির্বাচন করুন",
+  "enterPassword": "পাসওয়ার্ড লিখুন",
+  "repeatPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+  "iAgreeToThe": "আমি সম্মতি প্রদান করছি",
+  "termsAndConditions": "শর্তাবলী",
+  "register": "রেজিস্টার",
+  "alreadyAMember": "একটি অ্যাকাউন্ট আছে?",
+  "verify": "ভেরিফাই",
+  "verification": "ভেরিফিকেশন",
+  "enterTheOtpSentToTheNumber": "আপনার নাম্বারে পাঠানো OTP লিখুন",
+  "resendOtp": "পুনরায় OTP পাঠান",
+  "@@Forgot Password Page": "---------------Forgot Password Page---------------",
+  "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন",
+  "resetYourAccountPasswordAndAccess": "আপনার অ্যাকাউন্ট এর পাসওয়ার্ড রিসেট করুন",
+  "sendCode": "কোড পাঠান",
+  "@@OTP Verify Page": "---------------OTP Verify Page---------------",
+  "otpVerification": "OTP ভেরিফিকেশন",
+  "pleaseEnter4DigitOtp": "আপনাকে পাঠানো 4 ডিজিট OTP লিখুন",
+  "submit": "সাবমিট",
+  "didNotReceivedCode": "কোড পাননি?",
+  "resend": "পুনরায় পাঠান",
+  "@@Reset Password Page": "---------------Reset Password Page---------------",
+  "resetPassword": "পাসওয়ার্ড রিসেট করুন",
+  "setANewPassword": "একটি নতুন পাসওয়ার্ড সেট করুন",
+  "newPassword": "নতুন পাসওয়ার্ড",
+  "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+  "confirm": "নিশ্চিত",
+  "@@Dashboard Page": "---------------Dashboard Page---------------",
+  "home": "হোম",
+  "welcome": "স্বাগতম",
+  "alert": "এ্যালার্ট",
+  "alerts": "এ্যালার্ট",
+  "fnf": "এফ এন এফ",
+  "profile": "প্রোফাইল",
+  "emergencyService": "জরুরী সেবা",
+  "newAlert": "নতুন এ্যালার্ট",
+  "alertList": "এ্যালার্ট তালিকা",
+  "subscription": "সাবস্ক্রিপশন",
+  "feedback":"ফিডব্যাক",
+  "settings": "সেটিংস",
+  "privacyPolicy": "প্রাইভেসি পলিসি",
+  "invite": "আমন্ত্রণ জানান",
+  "version": "ভার্সন",
+  "myAlerts": "আমার এ্যালার্ট",
+  "respondedAlerts": "প্রতিক্রিয়া এ্যালার্ট",
+  "closedAlerts": "বন্ধ এ্যালার্ট",
+  "activeAlerts": "সক্রিয় এ্যালার্ট",
+  "map": "ম্যাপ",
+  "emergency":"জরুরী",
+  "tripleNine": "৯৯৯",
+  "@@Feedback Page": "---------------Feedback Page---------------",
+  "pleaseProvideYourValuableFeedback": "অ্যাপ ও সার্ভিস সম্পর্কে আপনার মূল্যবান মতামত দিন, এটি আমরা আমাদের উন্নত সেবা প্রদানে সাহায্য করবে।",
+  "writeYourFeedbackHere": "আপনার মতামত লিখুন...",
+  "feedbackSubmittedSuccessfully": "মতামত সফলভাবে প্রেরণ করা হয়েছে",
+  "@@Home Page": "---------------Home Page---------------",
+  "createAlert": "এ্যালার্ট তৈরি করুন",
+  "latestAlerts": "সর্বশেষ এ্যালার্ট",
+  "seeAll": "সব দেখুন",
+  "active": "সক্রিয়",
+  "closed": "বন্ধ",
+  "responded": "প্রতিক্রিয়া",
+  "yourActiveAlerts": "আপনার সক্রিয় এ্যালার্ট",
+  "@@Alert Map Page": "---------------Alert Map Page---------------",
+  "alertMap": "এ্যালার্ট ম্যাপ",
+  "loading": "লোড হচ্ছে",
+  "noAlertFound": "কোন এ্যালার্ট নেই",
+  "@@Alert Create Page": "---------------Alert Create Page---------------",
+  "createTypeNewAlert": "নতুন {type} এ্যালার্ট",
+  "@createTypeNewAlert": {
+    "placeholders": {
+      "type": {
+        "type":"Object"
+      }
+    }
+  },
+  "selectIncidentType": "ঘটনার ধরণ নির্বাচন করুন",
+  "describeYourIncident": "আপনার ঘটনার বিবরণ লিখুন",
+  "selectAlertLocation": "ঘটনার স্থান নির্বাচন করুন",
+  "egFlatNoRoadNo": "উদাঃ ফ্ল্যাট নং, রোড নং",
+  "captureOrUploadImage": "ছবি তুলুন বা আপলোড করুন",
+  "selectAnOption": "নির্বাচন করুন",
+  "camera": "ক্যামেরা",
+  "gallery": "গ্যালারি",
+  "alsoShareThisAlertWith": "এই এ্যালার্টটি শেয়ার করুন",
+  "starRequired": "* আবশ্যক",
+  "pleaseSelectAnIncidentType": "ঘটনার ধরণ নির্বাচন করুন",
+  "writeShortDescriptionAboutTheIncident": "ঘটনার বিবরণ লিখুন",
+  "selectALocation": "লোকেশন নির্বাচন করুন",
+  "postAlert": "এ্যালার্ট তৈরী করুন",
+  "successWithQuotes": "সফল!",
+  "congratulationsWithQuotes": "অভিনন্দন!",
+  "yourAlertHasBeenCreatedSuccessfully": "আপনার এ্যালার্ট সফলভাবে তৈরী হয়েছে",
+  "iAmSure":"আমি নিশ্চিত",
+  "iAmSureAboutTheAlert":"আপনি কি নিশ্চিত, এ্যালার্টটি তৈরী করতে চাচ্ছেন? অসত্য এ্যালার্ট আইনি ব্যবস্থা ও অ্যাকাউন্ট বাতিলের কারন হতে পারে।",
+  "communityAlertCreateInfoNotice":"বর্তমানে অল্পসংখ্যক কমিউনিটি এই অ্যাপটি ব্যবহার করায়, কমিউনিটি সহায়তা পেতে সাময়িক বিলম্ব হতে পারে। তবে আমরা ক্রমাগত সম্প্রসারিত হচ্ছি, এবং বিশ্বাস করি, সময়ের সঙ্গে এই সহায়তা আরও দ্রুত ও কার্যকর হয়ে উঠবে।",
+  "@@Alert Update Page": "---------------Alert Update Page---------------",
+  "alertUpdate": "এ্যালার্ট আপডেট করুন",
+  "addressOptional": "ঠিকানা (ঐচ্ছিক)",
+  "yourAlertHasBeenUpdatedSuccessfully": "আপনার এ্যালার্ট সফলভাবে আপডেট হয়েছে",
+  "@@Alert List Page": "---------------Alert List Page---------------",
+  "noAlertsFoundTypeOrCheckInternet": "কোন {type} এ্যালার্ট পাওয়া যায়নি অথবা ইন্টারনেট চেক করুন",
+  "@noAlertsFoundTypeOrCheckInternet": {
+    "placeholders": {
+      "type": {
+         "type": "Object"
+      }
+    }
+  },
+  "byWithName": "দ্বারা {name}",
+  "@byWithName": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "toKMConverter": "{distance} {unit, select, km{কি.মি} meter{মিটার} other{n/a}}",
+  "@toKMConverter":{
+    "placeholders": {
+        "unit": {
+           "type": "String"
+         },
+        "distance": {
+           "type": "num",
+           "format":"compact"
+        }
+    }
+  },
+  "@@Alert Details Page": "---------------Alert Details Page---------------",
+  "alertDetails": "এ্যালার্ট বিবরণ",
+  "date": "তারিখ",
+  "name": "নাম",
+  "typeOfIncident": "এ্যালার্ট এর ধরণ",
+  "shortDescription": "সংক্ষিপ্ত বিবরণ",
+  "alertDescription": "এ্যালার্ট এর বিবরণ",
+  "location": "স্থান",
+  "status": "স্থিতি",
+  "viewImage": "ছবি দেখুন",
+  "viewMap": "ম্যাপ দেখুন",
+  "viewOnMap": "ম্যাপ এ দেখুন",
+  "update": "আপডেট",
+  "close": "বন্ধ",
+  "add": "যোগ",
+  "delete": "মুছুন",
+  "response": "প্রতিক্রিয়া",
+  "responses": "প্রতিক্রিয়া সমুহ",
+  "noResponsesYet":"কোনো প্রতিক্রিয়া নেই",
+  "confirmation": "নিশ্চিত করুন",
+  "areYouSureYouWantToDeleteThisAlert": "আপনি কি এই এ্যালার্ট মুছতে চান?",
+  "yes": "হ্যাঁ",
+  "no": "না",
+  "call": "কল",
+  "areYouSureYouWantToCloseThisAlert": "আপনি কি এই এ্যালার্ট বন্ধ করতে চান?",
+  "areYouSureYouWantToDeleteThisResponse": "আপনি কি এই প্রতিক্রিয়া মুছতে চান?",
+  "areYouSureYouWantToUpdateThisAlert": "আপনি কি এই এ্যালার্ট আপডেট করতে চান?",
+  "areYouSureYouWantToRespondToThisAlert": "আপনি কি এই এ্যালার্ট প্রতিক্রিয়া করতে চান?",
+  "areYouSureYouWantToCancelThisResponse": "আপনি কি এই প্রতিক্রিয়া বাতিল করতে চান?",
+  "writeYourMessageHere": "আপনার মন্তব্য লিখুন",
+  "responseSent": "প্রতিক্রিয়া পাঠানো হয়েছে",
+  "reportAnIssue": "সমস্যা রিপোর্ট করুন",
+  "pleaseExplainInDetailWhyYouWantToReportAnIssue": "দয়া করে আপনি রিপোর্ট করার কারন বিস্তারিত বলুন এবং প্রয়োজনীয় তথ্য দিন যাতে আমাদের টিম দ্রুত ব্যবস্থা নিতে পারে।",
+  "writeYourIssue": "আপনার সমস্যা লিখুন",
+  "submitReport": "সাবমিট রিপোর্ট",
+  "reportSubmittedSuccessfully": "রিপোর্ট সফলভাবে পাঠানো হয়েছে",
+  "alertClosedSuccessfully":"এ্যালার্ট সফলভাবে বন্ধ করা হয়েছে",
+  "alertResponseCancelSuccessfully":"এ্যালার্ট রেসপন্স বাতিল করা হয়েছে",
+  "alertDeletedSuccessfully":"এ্যালার্ট মুছে ফেলা হয়েছে",
+  "alreadyRespondedByUserType":"ইতোমধ্যেই {user_type} রেসপন্স করেছেন",
+  "@alreadyRespondedByUserType":{
+    "placeholders":{
+        "user_type":{
+            "type":"Object"
+        }
+    }
+  },
+  "@@Profile Page": "---------------Profile Page---------------",
+  "edit": "সম্পাদনা",
+  "logout": "লগ আউট",
+  "@@Edit Profile Page": "---------------Edit Profile Page---------------",
+  "editProfile": "প্রোফাইল সম্পাদনা",
+  "saveChanges": "সংরক্ষণ করুন",
+  "profileUpdatedSuccessfully": "প্রোফাইল সফলভাবে আপডেট হয়েছে",
+  "@@Emergency Page": "---------------Emergency Page---------------",
+  "wantToGetDirectHelp":"জরুরি সাহায্য চান?",
+  "callNowToTalk":"কথা বলতে <call>৯৯৯</call> কল করুন",
+  "@@Settings Page": "---------------Settings Page---------------",
+  "language": "ভাষা",
+  "selectAppLanguage": "অ্যাপের ভাষা নির্বাচন করুন",
+  "english": "ইংরেজি",
+  "bangla": "বাংলা",
+  "notification": "নোটিফিকেশন",
+  "turnOnToGetNotifications": "নোটিফিকেশন সক্রিয় করুন",
+  "radius": "পরিক্ষেপ",
+  "selectYourAreaRadius": "আপনার সীমানা নির্বাচন করুন",
+  "changePassword": "পাসওয়ার্ড পরিবর্তন",
+  "changeYourAccountPassword": "অ্যাকাউন্ট পাসওয়ার্ড পরিবর্তন করুন",
+   "updatePermissionAndService": "পার্মিশন এবং সার্ভিস পরিবর্তন করুন",
+  "deleteYourAccount": "আপনার অ্যাকাউন্ট মুছুন",
+  "areYouSureYouWantToDeleteYourAccount": "আপনি কি আপনার অ্যাকাউন্ট মুছে ফেলতে চান?",
+  "deleteAccount": "অ্যাকাউন্ট মুছুন",
+  "warning": "সতর্কতা!",
+  "thisActionCannotBeUndone": "এটি স্থায়ী এবং পূর্বাবস্থায় ফেরানো যাবে না",
+  "allYourDataWillBeDeleted": "আপনার সমস্ত এ্যালার্ট, প্রতিক্রিয়া, এফএনএফ এবং প্রোফাইল ডেটা মুছে ফেলা হবে। একবার আপনি মুছে ফেললে আপনি স্বজাগে আপনার অ্যাক্সেস হারাবেন।",
+  "enterYourPasswordToProceed": "এগিয়ে যেতে আপনার পাসওয়ার্ড লিখুন",
+  "@@Location Settings Page": "---------------Location Settings Page---------------",
+  "locationSettings": "লোকেশন সেটিংস",
+  "backgroundLocation": "ব্যাকগ্রাউন্ড লোকেশন",
+  "accessToYourLocationWhenTheAppIsInBackground": "অ্যাপ ব্যাকগ্রাউন্ড অবস্থায় লোকেশন শেয়ার করুন",
+  "on": "চালু",
+  "off": "বন্ধ",
+  "turnOn":"চালু করুন",
+  "turnOff":"বন্ধ করুন",
+  "@@Change Password Page": "---------------Change Password Page---------------",
+  "currentPassword": "বর্তমান পাসওয়ার্ড",
+  "confirmNewPassword": "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+  "deletePermanently": "স্থায়ীভাবে মুছুন",
+  "@@FnF Home Page": "---------------FnF Home Page---------------",
+  "fnfLocator": "এফএনএফ লোকেটর",
+  "fnf": "এফএনএফ",
+  "locateYourFnf": "এফএনএফ এর লোকেশন জানুন",
+  "sharingPermission": "শেয়ারিং পার্মিশন",
+  "addNewFnF": "নতুন এফএনএফ যোগ করুন",
+  "viewMap": "ম্যাপ দেখুন",
+  "shareLocation": "লোকেশন শেয়ার করুন",
+  "change":"পরিবর্তন",
+  "changePermission":"পার্মিশন পরিবর্তন",
+  "enableBackgroundLocationToShareYourLocation":"অ্যাপ চালু না থাকলেও লোকেশন শেয়ার অব্যাহত রাখতে ব্যাকগ্রাউন্ড লোকেশন চালু করুন",
+  "allowShojagToAccessYourBackgroundLocationToShare":"স্বজাগ'এর এই ফিচারটি ব্যবহার করতে আপনার ব্যাকগ্রাউন্ড লোকেশন পার্মিশন দিন।",
+  "shojagCollectsBackgroundLocationToShareWithFnF":"স্বজাগ আপনার ব্যাকগ্রাউন্ড লোকেশন এফএনএফ দের সাথে শেয়ার করতে ব্যবহার করে, এমনকি যখন অ্যাপ বন্ধ বা নিষ্ক্রিয় থাকে",
+  "toShareYourLocationEvenTheApp":"অ্যাপ বন্ধ বা নিষ্ক্রিয় থাকা অবস্থায়ও লোকেশন শেয়ার করতে অ্যাপের লোকেশন সেটিংস থেকে 'অ্যালাউ অল দ্যা টাইম' নির্বাচন করুন",
+  "permissionLocationSettings":"অ্যাপ সেটিংস > পার্মিশন > লোকেশন > অ্যালাউ অল দ্যা টাইম",
+  "shareYourRealTimeLocationWithName":"{name} এর সাথে আপনার লোকেশন শেয়ার করুন",
+  "@shareYourRealTimeLocationWithName":{
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "forWithHour":"{hour} ঘণ্টার জন্য",
+  "@forWithHour":{
+    "placeholders":{
+       "hour":{
+         "type":"Object"
+       }
+    }
+  },
+  "untilITurnThisOff":"বন্ধ না করা পর্যন্ত",
+  "turnOff":"বন্ধ করুন",
+  "untilWithTime":"{time} পর্যন্ত",
+  "@untilWithTime":{
+    "placeholders":{
+      "time":{
+        "type":"Object"
+      }
+    }
+  },
+  "pending":"পেন্ডিং",
+  "cancelRequest":"অনুরোধ বাতিল",
+  "accept":"গ্রহণ করুন",
+  "decline":"অস্বীকার",
+  "areYouSureYouWantToRemoveFromYourFnfList":"আপনার কি আপনার এফএনএফ লিস্ট থেকে বাদ দিতে চান?",
+  "areYouSureYouWantToCancelFnFRequest":"আপনি কি এই এফএনএফ রিকুয়েস্ট বাতিল করতে চান?",
+  "areYouSureYouWantToAcceptThisRequest":"আপনি কি এই রিকুয়েস্ট গ্রহণ করতে চান?",
+  "areYouSureYouWantToDeclineThisRequest":"আপনি কি এই রিকুয়েস্ট অস্বীকার করতে চান?",
+  "sharingWithYou":"আপনাকে শেয়ার করা হচ্ছে",
+  "youAreSharing":"আপনি শেয়ার করছেন",
+  "@@Fnf Add Page": "---------------Fnf Add Page---------------",
+  "searchFnf": "এফএনএফ খুঁজুন",
+  "searchNumber": "ফোন নাম্বার খুঁজুন",
+  "contacts": "কন্ট্যাক্টস",
+  "searchResults": "অনুসন্ধান তালিকা",
+  "noContactsFound": "কন্ট্যাক্টস পাওয়া যায়নি",
+  "noUserFound": "কোন ব্যবহারকারী পাওয়া যায়নি। সঠিক নাম্বার দিয়ে আবার চেষ্টা করুন",
+  "areYouSureYouWantToSendRequestToUserName":"আপনি {name} কে এফএফএন এর জন্য অনুরোধ পাঠাতে চান?",
+  "@areYouSureYouWantToSendRequestToUserName":{
+    "placeholders":{
+      "name":{
+        "type":"Object"
+      }
+    }
+  },
+  "requestSent":"অনুরোধ পাঠানো হয়েছে",
+  "addToFnfList":"এফএনএফ যোগ করুন",
+  "alreadyInFnfList":"এফএনএফ ইতিমধ্যে আছে",
+  "@@Fnf Map View Page":"---------------Fnf Map View Page---------------",
+  "enterPlaceName":"স্থানের নাম লিখুন",
+  "tapOnMapToAddALocationAddSetALabel":"লোকেশন যোগ করার জন্য ম্যাপে ট্যাপ করুন",
+  "requestSentWaitForAccept":"অনুরোধ পাঠানো হয়েছে।",
+  "areYouSureYouWantToRemoveAddress":"আপনি কি এই ঠিকানা বাদ দিতে চান?",
+  "didNotSharedLocationWithYouUserName":"{name} আপনার সাথে লোকেশন শেয়ার চালু করেননি",
+  "@didNotSharedLocationWithYouUserName":{
+    "placeholders":{
+      "name":{
+        "type":"Object"
+      }
+    }
+  },
+  "addressDeletedSuccessfully":"ঠিকানা সফলভাবে মুছে ফেলা হয়েছে",
+  "addressAddedSuccessfully":"ঠিকানা সফলভাবে যুক্ত হয়েছে",
+  "you":"আপনি",
+  "tapToSendMessage":"বার্তা পাঠাতে ট্যাপ করুন",
+  "message":"বার্তা",
+  "noMessagesFound":"এখনো কোন বার্তা পাঠানো হয়নি",
+  "messageFromUserName":"{name} থেকে বার্তাঃ",
+  "@messageFromUserName":{
+    "placeholders":{
+      "name":{
+        "type":"Object"
+      }
+    }
+  },
+  "writeAMessage":"বার্তা লিখুন",
+  "dropAMessageForUserName":"{name} কে বার্তা পাঠান",
+  "@dropAMessageForUserName":{
+    "placeholders":{
+      "name":{
+        "type":"Object"
+      }
+    }
+  },
+  "messageSentSuccessfully":"বার্তা সফলভাবে পাঠানো হয়েছে",
+  "@@Premium Page":"---------------Premium Page---------------",
+  "upgrade":"আপগ্রেড",
+  "pro":"প্রো",
+  "pleaseUpgradeToProToUnlockAllFeatures":"সকল ফিচার ব্যবহার করতে অনুগ্রহ করে 'প্রো' তে আপগ্রেড করুন'",
+  "upgradeNow":"আপগ্রেড করুন",
+  "upgradeToPro":"প্রো তে আপগ্রেড",
+  "upgradeToShojagPro":"স্বজাগ প্রো তে আপগ্রেড",
+  "addFnf":"এফএনএফ যুক্ত করুন",
+  "youCanAddUnlimitedFnfWithPremiumUser":"আপনি যত খুশি FnF যোগ করতে পারেন, তবে তাদেরও প্রিমিয়াম ইউজার হতে হবে।",
+  "locateYourFnf":"এফএনএফ লোকেশন",
+  "locateYourFnfLiveLocation":"আপনি বিশ্বের যেকোনো জায়গায় আপনার FnF এর অবস্থান দেখতে পারবেন এবং তাদের লাইভ লোকেশন ট্র্যাক করতে পারবেন।",
+  "addCustomLocation":"এফএনএফ লোকেশন যুক্ত করুন",
+  "newPlace":"নতুন লোকেশন",
+  "locationWithUserName":"{name}'s লোকেশন",
+  "@locationWithUserName":{
+    "placeholders":{
+      "name":{
+        "type":"Object"
+        }
+    }
+  },
+  "nameIsRequired":"নাম লিখুন",
+  "addLocationToolTipWithUsername":"<bold>{username}</bold> এর লোকেশন নোটিফিকেশন পেতে লোকেশন যুক্ত করুন।\n\n১. ম্যাপে ট্যাপ করুন।\n২. লোকেশন লেবেল সেট করুন।",
+  "@addLocationToolTipWithUsername":{
+    "placeholders":{
+      "username":{
+        "type":"Object"
+        }
+    }
+  },
+  "requestToShareLocation":"লোকেশন শেয়ার করতে অনুরোধ করুন",
+  "youCanAddUpToAddressWithCount":"প্রতিটি এফএনএফ এ আপনি সর্বোচ্চ {count} টি লোকেশন যুক্ত করতে পারবেন এবং তারা যখন লোকেশনে পৌঁছাবে, আপনি একটি নোটিফিকেশন পাবেন।",
+  "@youCanAddUpToFnfWithCount":{
+    "placeholders":{
+      "count":{
+        "type":"Object"
+      }
+    }
+  },
+  "unlockProWithCurrencyAndAmount":"আনলক প্রো {currency} {amount}",
+  "@unlockProWithCurrencyAndAmount":{
+    "placeholders":{
+        "currency":{
+          "type":"Object"
+          },
+        "amount":{
+          "type":"Object"
+          }
+    }
+  },
+  "unlockProWithCurrencyAndAmountAndDays":"আনলক প্রো {days} দিন {currency} {amount}",
+  "@unlockProWithCurrencyAndAmountAndDays":{
+    "placeholders":{
+        "currency":{
+        "type":"Object"
+        },
+        "amount":{
+        "type":"Object"
+        },
+        "days":{
+        "type":"Object"
+        }
+    }
+  },
+  "youAreNotAPremiumUser":"আপনার প্রিমিয়াম সাবস্ক্রিপশন নেই, প্রিমিয়াম সেবাসমূহ উপভোগ করতে আপগ্রেড করুন",
+  "yourSubscriptionStatus":"আপনার সাবস্ক্রিপশন স্ট্যাটাস",
+  "premiumFeatures":"প্রিমিয়াম সেবাসমূহ",
+  "renewSubscription":"সাবস্ক্রিপশন রিনিউ করুন",
+  "yourSubscriptionWillBeExpireOnWithDate":"সাবস্ক্রিপশন এর মেয়াদ শেষ হবে {date}",
+  "@yourSubscriptionWillBeExpireOnWithDate":{
+    "placeholders":{
+      "date":{
+        "type":"Object"
+        }
+    }
+  },
+  "expireOn":"মেয়াদ শেষ হবে {date}",
+  "@yourSubscriptionWillBeExpireOnWithDate":{
+   "placeholders":{
+     "date":{
+       "type":"Object"
+     }
+   }
+  },
+  "remainingDays":"অবশিষ্ট : {days} দিন",
+  "@remainingDays":{
+    "placeholders":{
+      "days":{
+        "type":"Object"
+      }
+    }
+  },
+  "daysLeft":"{days} দিন বাকি",
+  "@daysLeft":{
+    "placeholders":{
+      "days":{
+        "type":"Object"
+      }
+    }
+  },
+  "upgradeToUnlockProFeatures":"প্রো সুবিধা পেতে আপগ্রেড করুন",
+  "yourCurrentSubscription":"আপনার বর্তমান সাবস্ক্রিপশন",
+  "@@Miscellaneous Page":"---------------Miscellaneous Page---------------",
+  "noInternetConnection":"ইন্টারনেট সংযোগ নেই",
+  "tryAgain":"আবার চেষ্টা করুন",
+  "somethingWentWrong":"কিছু ভুল হয়েছে",
+  "comingSoon":"শীঘ্রই আসছে",
+  "yourSessionHasBeenExpired":"আপনার সেশন এক্সপায়ার হয়ে গেছে!",
+  "loginAgainToContinue":"অ্যাপ ব্যবহার আবার লগিন করুন",
+  "loginAgain":"আবার লগিন করুন",
+  "ifYouFindThisAlertPostCommentMisleading":"আপনি যদি এই এ্যালার্ট/পোস্ট/মন্তব্যগুলিকে মিথ্যা, বিভ্রান্তিকর বা অনুপযুক্ত বলে মনে করেন, তাহলে অনুগ্রহ করে রিপোর্ট করুন। আমাদের টীম তা পর্যালোচনা করবে এবং প্রয়োজনীয় ব্যবস্থা নেবে।",
+  "agreeAndContinue":"সম্মতি দিলাম",
+  "locationAccessRequired":"লোকেশন অ্যাক্সেস প্রয়োজন",
+  "shojagCollectsYourLocationDataTo":"সজাগ আপনার লোকেশন ডেটা সংগ্রহ করেঃ",
+  "shojagLocationDataUsageMessages":"<tab1/><icon/> আপনার বর্তমান অবস্থান সনাক্ত করতে।<br/><tab1/><icon/> অন্যান্য ব্যবহারকারীদের দ্বারা তৈরি কাছাকাছি সতর্কতা সম্পর্কে আপনাকে অবহিত করতে।<br/><tab1/><icon/> আপনি নির্দিষ্ট জায়গায় পৌঁছলে আপনার বন্ধু এবং পরিবারকে অবহিত করতে।<br/><tab1/><icon/> নির্বাচিত পরিচিতিদের সাথে আপনার লাইভ অবস্থান শেয়ার করতে, আপনার ডেটা নিরাপদে সংরক্ষণ করা হবে এবং আপনার অনুমোদিত পরিচিতির সাথে <bold>শুধু</bold> শেয়ার করা হবে।<br/><br/><bold>সঠিক এ্যালার্ট এবং রিয়েল-টাইম আপডেট নিশ্চিত করতে </bold>অ্যাপ্লিকেশানটি বন্ধ থাকা বা ব্যবহার না করা অবস্থায়ও এই ডেটা সংগ্রহ করা হতে পারে।<br/><br/><red>⚠ <bold>এই অনুমতি ছাড়া, Shojag এর মূল বৈশিষ্ট্যগুলি প্রদান করতে পারবে না।</bold></red>",
+  "currentSubscription":"বর্তমান সাবস্ক্রিপশন",
+  "tryPremiumFeatures":"প্রিমিয়াম ফিচারসমূহ দেখুন",
+  "skip":"স্কিপ করুন",
+  "next":"পরবর্তী",
+  "previous":"পূর্ববর্তী",
+  "finish":"শেষ করুন",
+  "tourAgain":"পুনরায় দেখুন",
+  "@@Validators":"---------------Validators---------------",
+  "phoneNumberIsRequired":"ফোন নাম্বার লিখুন",
+  "phoneShouldBeElevenDigits":"ফোন নাম্বার ১১ ডিজিট হতে হবে",
+  "emailIsRequired":"ইমেইল লিখুন",
+  "emailShouldBeValid":"সঠিক ইমেইল লিখুন",
+  "nameIsRequired":"নাম লিখুন",
+  "firstNameIsRequired":"ফার্স্ট নাম লিখুন",
+  "lastNameIsRequired":"লাস্ট নাম লিখুন",
+  "genderIsRequired":"লিঙ্গ নির্বাচন করুন",
+  "policeIdIsRequired":"পুলিশ আইডি লিখুন",
+  "thanaIsRequired":"থানা নির্বাচন করুন",
+  "fireStationIsRequired":"ফাইর স্টেশন নির্বাচন করুন",
+  "hospitalOrAgencyIsRequired":"হাসপাতাল অথবা এজেন্সি নির্বাচন করুন",
+  "passwordIsRequired":"পাসওয়ার্ড লিখুন",
+  "passwordShouldBeAtLeastCharacters":"পাসওয়ার্ড কমপক্ষে {count} সংখ্যার হতে হবে",
+  "@passwordShouldBeAtLeastCharacters":{
+    "placeholders":{
+      "count":{
+      "type": "int",
+       "format": "compact"
+       }
+    }
+  },
+  "repeatPasswordIsRequired":"পুনরায় পাসওয়ার্ড লিখুন",
+  "passwordDidNotMatch":"একই পাসওয়ার্ড লিখুন",
+  "canNotBeNullOrEmptyByField":"{name} অবশ্যই দিতে হবে",
+  "@canNotBeNullOrEmptyByField":{
+     "placeholders":{
+       "name":{
+         "type": "Object"
+       }
+    }
+  }
+}

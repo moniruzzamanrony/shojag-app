@@ -1,0 +1,30 @@
+class UpdatePasswordRemoteResponseModel {
+  UpdatePasswordRemoteResponseModel({
+    this.success,
+    this.message,
+  });
+
+  UpdatePasswordRemoteResponseModel.fromJson(dynamic json) {
+    success = json['success'];
+    message = json['message'];
+  }
+
+  bool? success;
+  String? message;
+
+  UpdatePasswordRemoteResponseModel copyWith({
+    bool? success,
+    String? message,
+  }) =>
+      UpdatePasswordRemoteResponseModel(
+        success: success ?? this.success,
+        message: message ?? this.message,
+      );
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['success'] = success;
+    map['message'] = message;
+    return map;
+  }
+}

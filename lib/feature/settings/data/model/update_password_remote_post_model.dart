@@ -1,0 +1,27 @@
+class UpdatePasswordRemotePostModel {
+  int userId;
+  String oldPassword;
+  String newPassword;
+
+  UpdatePasswordRemotePostModel({
+    required this.userId,
+    required this.oldPassword,
+    required this.newPassword,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'user_id': userId,
+      'old_password': oldPassword,
+      'password': newPassword,
+    };
+  }
+
+  factory UpdatePasswordRemotePostModel.fromMap(Map<String, dynamic> map) {
+    return UpdatePasswordRemotePostModel(
+      userId: map['user_id'] as int,
+      oldPassword: map['old_password'] as String,
+      newPassword: map['password'] as String,
+    );
+  }
+}

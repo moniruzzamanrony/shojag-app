@@ -1,0 +1,36 @@
+class AlertDeleteRemoteResponseModel {
+  AlertDeleteRemoteResponseModel({
+    this.success,
+    this.data,
+    this.message,
+  });
+
+  AlertDeleteRemoteResponseModel.fromJson(dynamic json) {
+    success = json['success'];
+    data = json['data'];
+    message = json['message'];
+  }
+
+  bool? success;
+  num? data;
+  String? message;
+
+  AlertDeleteRemoteResponseModel copyWith({
+    bool? success,
+    num? data,
+    String? message,
+  }) =>
+      AlertDeleteRemoteResponseModel(
+        success: success ?? this.success,
+        data: data ?? this.data,
+        message: message ?? this.message,
+      );
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['success'] = success;
+    map['data'] = data;
+    map['message'] = message;
+    return map;
+  }
+}

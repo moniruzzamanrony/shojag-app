@@ -1,0 +1,86 @@
+class AlertResponseRemoteResponseModel {
+  AlertResponseRemoteResponseModel({
+      this.success, 
+      this.message, 
+      this.data,});
+
+  AlertResponseRemoteResponseModel.fromJson(dynamic json) {
+    success = json['success'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(Data.fromJson(v));
+      });
+    }
+  }
+  bool? success;
+  String? message;
+  List<Data>? data;
+AlertResponseRemoteResponseModel copyWith({  bool? success,
+  String? message,
+  List<Data>? data,
+}) => AlertResponseRemoteResponseModel(  success: success ?? this.success,
+  message: message ?? this.message,
+  data: data ?? this.data,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['success'] = success;
+    map['message'] = message;
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+class Data {
+  Data({
+      this.userName, 
+      this.responseMessage, 
+      this.responderId, 
+      this.profileImage, 
+      this.createdAt, 
+      this.updatedAt,});
+
+  Data.fromJson(dynamic json) {
+    userName = json['user_name'];
+    responseMessage = json['response_message'];
+    responderId = json['responder_id'];
+    profileImage = json['profile_image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+  String? userName;
+  dynamic responseMessage;
+  num? responderId;
+  dynamic profileImage;
+  String? createdAt;
+  String? updatedAt;
+Data copyWith({  String? userName,
+  dynamic responseMessage,
+  num? responderId,
+  dynamic profileImage,
+  String? createdAt,
+  String? updatedAt,
+}) => Data(  userName: userName ?? this.userName,
+  responseMessage: responseMessage ?? this.responseMessage,
+  responderId: responderId ?? this.responderId,
+  profileImage: profileImage ?? this.profileImage,
+  createdAt: createdAt ?? this.createdAt,
+  updatedAt: updatedAt ?? this.updatedAt,
+);
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['user_name'] = userName;
+    map['response_message'] = responseMessage;
+    map['responder_id'] = responderId;
+    map['profile_image'] = profileImage;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
+    return map;
+  }
+
+}

@@ -1,0 +1,1146 @@
+/*
+ui : registration page ui
+*/
+
+import 'package:app/core/config/theme/app_colors.dart';
+import 'package:app/core/utils/constants/assets.dart';
+import 'package:app/core/utils/enums/message_type.dart';
+import 'package:app/core/utils/extension/context_extension.dart';
+import 'package:app/core/utils/extension/number_extension.dart';
+import 'package:app/core/utils/helper/helper_functions.dart';
+import 'package:app/core/utils/validator/field_validators.dart';
+import 'package:app/feature/auth/presentation/page/getting_started_page.dart';
+import 'package:app/feature/auth/presentation/provider/registration_provider.dart';
+import 'package:app/feature/auth/presentation/widget/auth_text_field.dart';
+import 'package:app/feature/common/presentation/provider/session_provider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/config/router/routes.dart';
+import '../../../../core/utils/enums/gender.dart';
+import '../../../../core/utils/enums/user_type.dart';
+import '../../../../shared/widget/powered_by_widget.dart';
+import '../widget/auth_button_widget.dart';
+import '../widget/custom_app_bar.dart';
+import '../widget/otp_dialog.dart';
+
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
+  @override
+  State<RegistrationPage> createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _phoneFieldKey = GlobalKey<FormFieldState>();
+
+  late final TextEditingController firstNameController;
+  late final TextEditingController lastNameController;
+  late final TextEditingController emailController;
+  late final TextEditingController phoneController;
+  late final TextEditingController passwordController;
+  late final TextEditingController repeatPasswordController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    emailController = TextEditingController();
+    phoneController = TextEditingController();
+    passwordController = TextEditingController();
+    repeatPasswordController = TextEditingController();
+
+    context.read<RegistrationProvider>().resetAll();
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    repeatPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.colorPrimary,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const CustomAppBar(
+              title: 'Registration',
+            ),
+            20.gapH,
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                decoration: BoxDecoration(
+                    color: AppColors.colorWhite,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    )),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              20.gapH,
+                              Selector<RegistrationProvider, UserType?>(
+                                selector: (_, provider) =>
+                                    provider.selectedUserType,
+                                builder: (_, value, __) => value != null
+                                    ? SizedBox.shrink()
+                                    : Row(
+                                        children: [
+                                          Expanded(
+                                              child: Divider(
+                                            height: 0,
+                                            endIndent: 8.0,
+                                          )),
+                                          Text(
+                                            'Join SHOJAG As',
+                                            style: TextStyle(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          Expanded(
+                                              child: Divider(
+                                            height: 0,
+                                            indent: 8.0,
+                                          )),
+                                        ],
+                                      ),
+                              ),
+                              12.gapH,
+                              _userType(),
+                              20.gapH,
+                              _formByUserType(),
+                              34.gapH,
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Already a member? ',
+                                    style: TextStyle(
+                                        color: AppColors.colorAppGrey,
+                                        fontSize: 14.sp),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      context
+                                          .pushReplacementNamed(Routes.login);
+                                    },
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                          color: AppColors.colorAppBlueDark,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    PoweredByWidget(
+                        textColor: AppColors.colorAppGrey,
+                        imgColor: AppColors.colorPrimary),
+                    20.gapH,
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _userType() => Selector<RegistrationProvider, UserType?>(
+        selector: (_, provider) => provider.selectedUserType,
+        builder: (_, value, __) => SizedBox(
+          width: double.infinity,
+          //height: 50.h,
+          child: Row(
+            children: [
+              Expanded(
+                  child: _UserTypeWidget(
+                userType: UserType.community,
+                isSelected: value == UserType.community,
+              )),
+              8.gapW,
+              Expanded(
+                  child: _UserTypeWidget(
+                userType: UserType.police,
+                isSelected: value == UserType.police,
+              )),
+              8.gapW,
+              Expanded(
+                  child: _UserTypeWidget(
+                userType: UserType.fireService,
+                isSelected: value == UserType.fireService,
+              )),
+              8.gapW,
+              Expanded(
+                  child: _UserTypeWidget(
+                userType: UserType.ambulance,
+                isSelected: value == UserType.ambulance,
+              )),
+            ],
+          ),
+        ),
+      );
+
+  Widget _gender(BuildContext ctx) => Selector<RegistrationProvider, Gender?>(
+        selector: (_, provider) => provider.selectGender,
+        builder: (_, value, __) => DropdownButtonHideUnderline(
+          child: DropdownButton2<Gender>(
+            isExpanded: true,
+            hint: const Text(
+              'Select your gender',
+              style: TextStyle(color: Colors.grey),
+              overflow: TextOverflow.ellipsis,
+            ),
+            style: TextStyle(
+                fontSize: 12.sp, height: 1, color: ctx.colorScheme.primary),
+            items: Gender.values
+                .map((item) => DropdownMenuItem<Gender>(
+                      value: item,
+                      child: Text(
+                        item.title,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          height: 1,
+                          color: Colors.black,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ))
+                .toList(),
+            value: value,
+            onChanged: (value) {
+              ctx.read<RegistrationProvider>().selectGender = value;
+            },
+            buttonStyleData: ButtonStyleData(
+              padding:
+                  EdgeInsets.only(top: 6.h, bottom: 6.h, left: 0, right: 14.w),
+              height: 40.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                border: Border.all(
+                  color: AppColors.colorAppGrey,
+                ),
+                color: Colors.white,
+              ),
+              elevation: 0,
+            ),
+            iconStyleData: IconStyleData(
+              icon: const Icon(
+                Icons.keyboard_arrow_down,
+              ),
+              iconSize: 16.r,
+              iconEnabledColor: AppColors.colorAppGrey,
+              iconDisabledColor: AppColors.colorAppGrey,
+            ),
+            dropdownStyleData: DropdownStyleData(
+              maxHeight: 200.h,
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 6.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.r),
+                color: Colors.white,
+              ),
+              scrollbarTheme: ScrollbarThemeData(
+                radius: Radius.circular(40.r),
+                thickness: WidgetStateProperty.all<double>(3),
+                thumbVisibility: WidgetStateProperty.all<bool>(true),
+              ),
+            ),
+            menuItemStyleData: MenuItemStyleData(
+                height: 32.h,
+                selectedMenuItemBuilder: (context, child) => ColoredBox(
+                      color: context.colorScheme.primary.withAlpha(30),
+                      child: child,
+                    ),
+                padding: EdgeInsets.symmetric(horizontal: 6.r)),
+          ),
+        ),
+      );
+
+  Widget _itemSeparator() => 12.gapH;
+
+  void _verifyPhone(BuildContext context) async {
+    final isValid = _phoneFieldKey.currentState?.validate();
+    if (isValid != true) {
+      return;
+    }
+
+    final phoneNumber = phoneController.text;
+    final tempId = await context
+        .read<RegistrationProvider>()
+        .verifyPhone(phoneNumber)
+        .onError(
+      (error, stackTrace) {
+        if (context.mounted) {
+          showAppFlushBar(context,
+              message: error?.toString(), type: MessageType.error);
+        }
+        return -1;
+      },
+    );
+
+    if (tempId > 0) {
+      if (!context.mounted) {
+        return;
+      }
+      showAppDialog(context,
+          barrierDismissible: false,
+          dialogWidget: OtpDialog(
+            phoneNumber: phoneNumber,
+            tempId: tempId,
+          ));
+    }
+  }
+
+  Widget _formByUserType() {
+    return Selector<RegistrationProvider, UserType?>(
+      builder: (_, value, __) {
+        Widget child = SizedBox(
+          width: double.infinity,
+        );
+        if (value == UserType.community) {
+          child = _communityFormSection();
+        } else if (value == UserType.police) {
+          child = _policeFormSection();
+        } else if (value == UserType.fireService) {
+          child = _fireServiceSection();
+        } else if (value == UserType.ambulance) {
+          child = _ambulanceSection();
+        }
+        return child;
+      },
+      selector: (_, provider) => provider.selectedUserType,
+    );
+  }
+
+  Widget _communityFormSection() {
+    final int interval = 120;
+    final int period = 30;
+    final duration = Duration(milliseconds: interval);
+    final delay0 = Duration(milliseconds: interval * 0);
+    final delay1 = Duration(milliseconds: interval * 1 - (period * 1));
+    final delay2 = Duration(milliseconds: interval * 2 - (period * 2));
+    final delay3 = Duration(milliseconds: interval * 3 - (period * 3));
+    final delay4 = Duration(milliseconds: interval * 4 - (period * 4));
+    final delay5 = Duration(milliseconds: interval * 5 - (period * 5));
+    final delay6 = Duration(milliseconds: interval * 6 - (period * 6));
+
+    List<Effect<dynamic>>? effects = [
+      SlideEffect(
+          duration: duration, begin: Offset(0.0, -0.2), end: Offset.zero),
+      FadeEffect(duration: duration),
+    ];
+
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: AuthTextField(
+            hintText: 'First Name',
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'First name');
+            },
+            controller: firstNameController,
+          )),
+          10.gapW,
+          Expanded(
+              child: AuthTextField(
+            hintText: 'Last Name',
+            controller: lastNameController,
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'Last name');
+            },
+          )),
+        ],
+      ).animate(
+        delay: delay0,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      AuthTextField(
+        hintText: 'Email',
+        controller: emailController,
+        validator: FieldValidators.emailNullableValidator,
+      ).animate(
+        delay: delay1,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.isPhoneVerified,
+        builder: (_, isPhoneVerified, __) => AuthTextField(
+          // mKey: _phoneFieldKey,
+          hintText: 'Phone',
+          readOnly: isPhoneVerified,
+          keyboardType: TextInputType.phone,
+          controller: phoneController,
+          validator: FieldValidators.phoneValidator,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(11),
+          ],
+          suffixIcon: isPhoneVerified
+              ? Icon(
+                  Icons.check_circle,
+                  color: context.colorScheme.primary,
+                )
+              : Selector<RegistrationProvider, bool>(
+                  selector: (_, provider) => provider.isPhoneVerifying,
+                  builder: (_, isPhoneVerifying, __) => isPhoneVerifying
+                      ? Align(
+                          alignment: Alignment.centerRight,
+                          widthFactor: 0.2,
+                          child: Container(
+                              height: 16.r,
+                              width: 16.r,
+                              margin: EdgeInsets.only(right: 10.w),
+                              child: const CircularProgressIndicator()))
+                      : InkWell(
+                          onTap: () {
+                            _verifyPhone(context);
+                          },
+                          child: const Text(
+                            'Verify',
+                            style: TextStyle(color: AppColors.colorAppGreen),
+                          ),
+                        ),
+                ),
+        ),
+      ).animate(
+        delay: delay2,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      _gender(context).animate(delay: delay3, effects: [
+        SlideEffect(duration: duration),
+        FadeEffect(duration: duration),
+      ]).animate(
+        delay: delay3,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: passwordController,
+          validator: FieldValidators.passwordValidator,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Password',
+        ),
+      ).animate(
+        delay: delay4,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: repeatPasswordController,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Repeat Password',
+          validator: (p0) {
+            return FieldValidators.repeatPasswordValidator!(p0,
+                anotherValue: passwordController.text);
+          },
+        ),
+      ).animate(
+        delay: delay5,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      20.gapH,
+      AnimatedSize(
+        duration: const Duration(milliseconds: 350),
+        child: Selector<RegistrationProvider, bool>(
+          selector: (_, provider) => provider.isRegistering,
+          builder: (_, value, __) => value
+              ? SizedBox(
+                  height: 40.h,
+                  width: 40.h,
+                  child: const CircularProgressIndicator())
+              : AuthButtonWidget(
+                  buttonText: 'Register',
+                  onPressed: () {
+                    _register(context);
+                  },
+                  buttonColor: AppColors.colorAppGreen),
+        ),
+      ).animate(
+        delay: delay6,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+    ]);
+  }
+
+  Widget _policeFormSection() {
+    final int interval = 120;
+    final int period = 30;
+    final duration = Duration(milliseconds: interval);
+    final delay0 = Duration(milliseconds: interval * 0);
+    final delay1 = Duration(milliseconds: interval * 1 - (period * 1));
+    final delay2 = Duration(milliseconds: interval * 2 - (period * 2));
+    final delay3 = Duration(milliseconds: interval * 3 - (period * 3));
+    final delay4 = Duration(milliseconds: interval * 4 - (period * 4));
+    final delay5 = Duration(milliseconds: interval * 5 - (period * 5));
+    final delay6 = Duration(milliseconds: interval * 6 - (period * 6));
+
+    List<Effect<dynamic>>? effects = [
+      SlideEffect(duration: duration, begin: Offset(-0.1, 0), end: Offset.zero),
+      FadeEffect(duration: duration),
+    ];
+
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: AuthTextField(
+            hintText: 'First Name',
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'First name');
+            },
+            controller: firstNameController,
+          )),
+          10.gapW,
+          Expanded(
+              child: AuthTextField(
+            hintText: 'Last Name',
+            controller: lastNameController,
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'Last name');
+            },
+          )),
+        ],
+      ).animate(
+        delay: delay0,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      AuthTextField(
+        hintText: 'Email',
+        controller: emailController,
+        validator: FieldValidators.emailNullableValidator,
+      ).animate(
+        delay: delay1,
+        effects: effects,
+        key: UniqueKey(),
+      ),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.isPhoneVerified,
+        builder: (_, isPhoneVerified, __) => AuthTextField(
+          mKey: _phoneFieldKey,
+          hintText: 'Phone',
+          readOnly: isPhoneVerified,
+          keyboardType: TextInputType.phone,
+          controller: phoneController,
+          validator: FieldValidators.phoneValidator,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(11),
+          ],
+          suffixIcon: isPhoneVerified
+              ? Icon(
+                  Icons.check_circle,
+                  color: context.colorScheme.primary,
+                )
+              : Selector<RegistrationProvider, bool>(
+                  selector: (_, provider) => provider.isPhoneVerifying,
+                  builder: (_, isPhoneVerifying, __) => isPhoneVerifying
+                      ? Align(
+                          alignment: Alignment.centerRight,
+                          widthFactor: 0.2,
+                          child: Container(
+                              height: 16.r,
+                              width: 16.r,
+                              margin: EdgeInsets.only(right: 10.w),
+                              child: const CircularProgressIndicator()))
+                      : InkWell(
+                          onTap: () {
+                            _verifyPhone(context);
+                          },
+                          child: const Text(
+                            'Verify',
+                            style: TextStyle(color: AppColors.colorAppGreen),
+                          ),
+                        ),
+                ),
+        ),
+      ).animate(key: UniqueKey(), delay: delay2, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: passwordController,
+          validator: FieldValidators.passwordValidator,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Password',
+        ),
+      ).animate(key: UniqueKey(), delay: delay3, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: repeatPasswordController,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Repeat Password',
+          validator: (p0) {
+            return FieldValidators.repeatPasswordValidator!(p0,
+                anotherValue: passwordController.text);
+          },
+        ),
+      ).animate(key: UniqueKey(), delay: delay4, effects: effects),
+      20.gapH,
+      AnimatedSize(
+        duration: const Duration(milliseconds: 350),
+        child: Selector<RegistrationProvider, bool>(
+          selector: (_, provider) => provider.isRegistering,
+          builder: (_, value, __) => value
+              ? SizedBox(
+                  height: 40.h,
+                  width: 40.h,
+                  child: const CircularProgressIndicator())
+              : AuthButtonWidget(
+                  buttonText: 'Register',
+                  onPressed: () {
+                    _register(context);
+                  },
+                  buttonColor: AppColors.colorAppGreen),
+        ),
+      ).animate(key: UniqueKey(), delay: delay5, effects: effects),
+    ]);
+  }
+
+  Widget _fireServiceSection() {
+    final int interval = 120;
+    final int period = 30;
+    final duration = Duration(milliseconds: interval);
+    final delay0 = Duration(milliseconds: interval * 0);
+    final delay1 = Duration(milliseconds: interval * 1 - (period * 1));
+    final delay2 = Duration(milliseconds: interval * 2 - (period * 2));
+    final delay3 = Duration(milliseconds: interval * 3 - (period * 3));
+    final delay4 = Duration(milliseconds: interval * 4 - (period * 4));
+    final delay5 = Duration(milliseconds: interval * 5 - (period * 5));
+    final delay6 = Duration(milliseconds: interval * 6 - (period * 6));
+
+    List<Effect<dynamic>>? effects = [
+      SlideEffect(duration: duration, begin: Offset(0, 0.4), end: Offset.zero),
+      FadeEffect(duration: duration),
+    ];
+
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: AuthTextField(
+            hintText: 'First Name',
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'First name');
+            },
+            controller: firstNameController,
+          )),
+          10.gapW,
+          Expanded(
+              child: AuthTextField(
+            hintText: 'Last Name',
+            controller: lastNameController,
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'Last name');
+            },
+          )),
+        ],
+      ).animate(key: UniqueKey(), delay: delay0, effects: effects),
+      _itemSeparator(),
+      AuthTextField(
+        hintText: 'Email',
+        controller: emailController,
+        validator: FieldValidators.emailNullableValidator,
+      ).animate(key: UniqueKey(), delay: delay1, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.isPhoneVerified,
+        builder: (_, isPhoneVerified, __) => AuthTextField(
+          mKey: _phoneFieldKey,
+          hintText: 'Phone',
+          readOnly: isPhoneVerified,
+          keyboardType: TextInputType.phone,
+          controller: phoneController,
+          validator: FieldValidators.phoneValidator,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(11),
+          ],
+          suffixIcon: isPhoneVerified
+              ? Icon(
+                  Icons.check_circle,
+                  color: context.colorScheme.primary,
+                )
+              : Selector<RegistrationProvider, bool>(
+                  selector: (_, provider) => provider.isPhoneVerifying,
+                  builder: (_, isPhoneVerifying, __) => isPhoneVerifying
+                      ? Align(
+                          alignment: Alignment.centerRight,
+                          widthFactor: 0.2,
+                          child: Container(
+                              height: 16.r,
+                              width: 16.r,
+                              margin: EdgeInsets.only(right: 10.w),
+                              child: const CircularProgressIndicator()))
+                      : InkWell(
+                          onTap: () {
+                            _verifyPhone(context);
+                          },
+                          child: const Text(
+                            'Verify',
+                            style: TextStyle(color: AppColors.colorAppGreen),
+                          ),
+                        ),
+                ),
+        ),
+      ).animate(key: UniqueKey(), delay: delay2, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: passwordController,
+          validator: FieldValidators.passwordValidator,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Password',
+        ),
+      ).animate(key: UniqueKey(), delay: delay3, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: repeatPasswordController,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Repeat Password',
+          validator: (p0) {
+            return FieldValidators.repeatPasswordValidator!(p0,
+                anotherValue: passwordController.text);
+          },
+        ),
+      ).animate(key: UniqueKey(), delay: delay4, effects: effects),
+      20.gapH,
+      AnimatedSize(
+        duration: const Duration(milliseconds: 350),
+        child: Selector<RegistrationProvider, bool>(
+          selector: (_, provider) => provider.isRegistering,
+          builder: (_, value, __) => value
+              ? SizedBox(
+                  height: 40.h,
+                  width: 40.h,
+                  child: const CircularProgressIndicator())
+              : AuthButtonWidget(
+                  buttonText: 'Register',
+                  onPressed: () {
+                    _register(context);
+                  },
+                  buttonColor: AppColors.colorAppGreen),
+        ),
+      ).animate(key: UniqueKey(), delay: delay5, effects: effects),
+    ]);
+  }
+
+  Widget _ambulanceSection() {
+    final int interval = 120;
+    final int period = 30;
+    final duration = Duration(milliseconds: interval);
+    final delay0 = Duration(milliseconds: interval * 0);
+    final delay1 = Duration(milliseconds: interval * 1 - (period * 1));
+    final delay2 = Duration(milliseconds: interval * 2 - (period * 2));
+    final delay3 = Duration(milliseconds: interval * 3 - (period * 3));
+    final delay4 = Duration(milliseconds: interval * 4 - (period * 4));
+    final delay5 = Duration(milliseconds: interval * 5 - (period * 5));
+    final delay6 = Duration(milliseconds: interval * 6 - (period * 6));
+
+    List<Effect<dynamic>>? effects = [
+      SlideEffect(duration: duration, begin: Offset(0.1, 0), end: Offset.zero),
+      FadeEffect(duration: duration),
+    ];
+
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: AuthTextField(
+            hintText: 'First Name',
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'First name');
+            },
+            controller: firstNameController,
+          )),
+          10.gapW,
+          Expanded(
+              child: AuthTextField(
+            hintText: 'Last Name',
+            controller: lastNameController,
+            validator: (p0) {
+              return FieldValidators.customEmptyOrNullValidator!(p0,
+                  fieldName: 'Last name');
+            },
+          )),
+        ],
+      ).animate(key: UniqueKey(), delay: delay0, effects: effects),
+      _itemSeparator(),
+      AuthTextField(
+        hintText: 'Email',
+        controller: emailController,
+        validator: FieldValidators.emailNullableValidator,
+      ).animate(key: UniqueKey(), delay: delay1, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.isPhoneVerified,
+        builder: (_, isPhoneVerified, __) => AuthTextField(
+          mKey: _phoneFieldKey,
+          hintText: 'Phone',
+          readOnly: isPhoneVerified,
+          keyboardType: TextInputType.phone,
+          controller: phoneController,
+          validator: FieldValidators.phoneValidator,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(11),
+          ],
+          suffixIcon: isPhoneVerified
+              ? Icon(
+                  Icons.check_circle,
+                  color: context.colorScheme.primary,
+                )
+              : Selector<RegistrationProvider, bool>(
+                  selector: (_, provider) => provider.isPhoneVerifying,
+                  builder: (_, isPhoneVerifying, __) => isPhoneVerifying
+                      ? Align(
+                          alignment: Alignment.centerRight,
+                          widthFactor: 0.2,
+                          child: Container(
+                              height: 16.r,
+                              width: 16.r,
+                              margin: EdgeInsets.only(right: 10.w),
+                              child: const CircularProgressIndicator()))
+                      : InkWell(
+                          onTap: () {
+                            _verifyPhone(context);
+                          },
+                          child: const Text(
+                            'Verify',
+                            style: TextStyle(color: AppColors.colorAppGreen),
+                          ),
+                        ),
+                ),
+        ),
+      ).animate(key: UniqueKey(), delay: delay2, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: passwordController,
+          validator: FieldValidators.passwordValidator,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Password',
+        ),
+      ).animate(key: UniqueKey(), delay: delay3, effects: effects),
+      _itemSeparator(),
+      Selector<RegistrationProvider, bool>(
+        selector: (_, provider) => provider.passwordObscureText,
+        builder: (_, value, __) => AuthTextField(
+          obscureText: value,
+          controller: repeatPasswordController,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              context.read<RegistrationProvider>().togglePasswordObscure();
+            },
+            child: Icon(
+              value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+              color: AppColors.colorAppGrey,
+            ),
+          ),
+          hintText: 'Repeat Password',
+          validator: (p0) {
+            return FieldValidators.repeatPasswordValidator!(p0,
+                anotherValue: passwordController.text);
+          },
+        ),
+      ).animate(key: UniqueKey(), delay: delay4, effects: effects),
+      20.gapH,
+      AnimatedSize(
+        duration: const Duration(milliseconds: 350),
+        child: Selector<RegistrationProvider, bool>(
+          selector: (_, provider) => provider.isRegistering,
+          builder: (_, value, __) => value
+              ? SizedBox(
+                  height: 40.h,
+                  width: 40.h,
+                  child: const CircularProgressIndicator())
+              : AuthButtonWidget(
+                  buttonText: 'Register',
+                  onPressed: () {
+                    _register(context);
+                  },
+                  buttonColor: AppColors.colorAppGreen),
+        ),
+      ).animate(key: UniqueKey(), delay: delay5, effects: effects),
+    ]);
+  }
+
+  void _register(BuildContext ctx) async {
+    FocusScope.of(ctx).unfocus();
+    final isFormValid = _formKey.currentState?.validate();
+    if (isFormValid == true) {
+      final registrationProvider = ctx.read<RegistrationProvider>();
+      final sessionProvider = ctx.read<SessionProvider>();
+      if (!registrationProvider.isPhoneVerified) {
+        showAppFlushBar(ctx,
+            type: MessageType.error,
+            message: 'Please verify your phone number first');
+        return;
+      }
+      final tempId = registrationProvider.tempId;
+      if (tempId == null) {
+        return;
+      }
+      final token = registrationProvider.token;
+      if (token == null) {
+        return;
+      }
+
+      final selectedType = registrationProvider.selectedUserType;
+      if (selectedType == null) {
+        showAppFlushBar(ctx,
+            type: MessageType.error,
+            message: 'Select a user type, what you are');
+        return;
+      }
+
+      final selectedGender = registrationProvider.selectGender;
+      if (selectedGender == null) {
+        showAppFlushBar(ctx,
+            type: MessageType.error, message: 'Select your gender');
+        return;
+      }
+
+      final firstName = firstNameController.text;
+      final lastName = lastNameController.text;
+      final email = emailController.text;
+      final phone = phoneController.text;
+      final password = passwordController.text;
+      final repeatPassword = repeatPasswordController.text;
+
+      final user = await registrationProvider
+          .register(
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              userType: selectedType.title,
+              gender: selectedGender.title,
+              password: password,
+              repeatPassword: repeatPassword,
+              token: token,
+              tempId: tempId)
+          .onError(
+        (error, stackTrace) {
+          if (ctx.mounted) {
+            showAppFlushBar(ctx,
+                message: error?.toString(), type: MessageType.error);
+          }
+
+          return null;
+        },
+      );
+
+      if (user == null) {
+        return;
+      }
+
+      await sessionProvider.saveSessionInfo(
+          loginStatus: true,
+          userId: user.id ?? 0,
+          apiToken: user.token ?? '',
+          firstName: user.firstName ?? '',
+          lastName: user.lastName ?? '',
+          phone: user.phone ?? '',
+          isEmailVerified: user.isEmailVerified ?? false,
+          email: user.email,
+          address: user.address,
+          deviceToken: user.deviceToken,
+          dob: user.dob,
+          gender: user.gender,
+          nid: user.nid,
+          photo: user.photo);
+      if (ctx.mounted) {
+        ctx.goNamed(Routes.dashboard);
+      }
+    }
+  }
+}
+
+class _UserTypeWidget extends StatelessWidget {
+  final UserType userType;
+  final bool isSelected;
+
+  const _UserTypeWidget(
+      {super.key, required this.userType, required this.isSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.read<RegistrationProvider>().selectedUserType = userType;
+      },
+      child: Container(
+        padding: EdgeInsets.all(6.r),
+        decoration: BoxDecoration(
+          color: isSelected ? context.colorScheme.primary : Colors.grey.shade50,
+          borderRadius: BorderRadius.circular(6.r),
+        ),
+        child: Column(
+          children: [
+            Image.asset(icon, height: 40.h),
+            8.gapH,
+            Text(
+              userType.title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  height: 1.0,
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w500,
+                  color: isSelected
+                      ? context.colorScheme.onPrimary
+                      : Colors.black),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  String get icon {
+    String icon = '';
+    switch (userType) {
+      case UserType.fireService:
+        icon = Assets.fireServicePng;
+        break;
+      case UserType.police:
+        icon = Assets.policePng;
+        break;
+      case UserType.ambulance:
+        icon = Assets.ambulancePng;
+        break;
+      case UserType.community:
+        icon = Assets.citizenPng;
+        break;
+      case UserType.none:
+    }
+    return icon;
+  }
+}

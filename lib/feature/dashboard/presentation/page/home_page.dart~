@@ -1,0 +1,144 @@
+/*
+* ui: home page
+*/
+
+import 'package:app/core/config/router/routes.dart';
+import 'package:app/core/utils/enums/alert_type.dart';
+import 'package:app/core/utils/enums/user_type.dart';
+import 'package:app/core/utils/extension/context_extension.dart';
+import 'package:app/core/utils/extension/number_extension.dart';
+import 'package:app/feature/dashboard/presentation/provider/home_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/config/theme/app_colors.dart';
+import '../../../../core/utils/constants/assets.dart';
+import '../../../alert/presentation/provider/incident_provider.dart';
+import '../../../settings/presentation/page/settings_page.dart';
+import '../provider/nav_menu_provider.dart';
+import '../widget/dashboard_button_widget.dart';
+import '../widget/recent_section_widget.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final controller = context.read<NavMenuProvider>().drawerKey.currentState?.showBottomSheet((context) {
+        return const SettingsPage();
+      },);
+    },);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('home page build');
+    return ChangeNotifierProvider(
+      create: (context) => HomeProvider(),
+      builder: (context, child) => Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        decoration: BoxDecoration(
+            color: AppColors.colorWhite,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.r),
+                topRight: Radius.circular(20.r))),
+        child: context.userType == UserType.citizen
+            ? _communitySection(context)
+            : _otherSection(context),
+      ),
+    );
+  }
+
+  _otherSection(BuildContext context) {
+    return RecentSectionWidget();
+  }
+
+  Column _communitySection(BuildContext context) {
+    return Column(
+      children: [
+        24.gapH,
+        Row(
+          children: [
+            Expanded(
+                child: DashboardButtonWidget(
+              backgroundColor: AppColors.colorAppGreen,
+              icon: Assets.citizenPng,
+              buttonText: 'Community',
+              onTap: () async {
+                await context
+                    .read<IncidentProvider>()
+                    .getIncidentList(categoryId: AlertType.community.id);
+                if (context.mounted) {
+                  context.goNamed(Routes.alertAdd, extra: AlertType.community);
+                }
+              },
+            )),
+            20.gapW,
+            Expanded(
+                child: DashboardButtonWidget(
+              backgroundColor: const Color(0xff36509b),
+              icon: Assets.policePng,
+              buttonText: 'Police',
+              onTap: () async {
+                await context
+                    .read<IncidentProvider>()
+                    .getIncidentList(categoryId: AlertType.police.id);
+                if (context.mounted) {
+                  context.goNamed(Routes.alertAdd, extra: AlertType.police);
+                }
+              },
+            )),
+          ],
+        ),
+        20.gapW,
+        Row(
+          children: [
+            Expanded(
+                child: DashboardButtonWidget(
+              backgroundColor: const Color(0xffcc585b),
+              icon: Assets.fireServicePng,
+              buttonText: 'Fire Service',
+              onTap: () async {
+                await context
+                    .read<IncidentProvider>()
+                    .getIncidentList(categoryId: AlertType.fireService.id);
+                if (context.mounted) {
+                  context.goNamed(Routes.alertAdd,
+                      extra: AlertType.fireService);
+                }
+              },
+            )),
+            20.gapW,
+            Expanded(
+                child: DashboardButtonWidget(
+              backgroundColor: AppColors.colorAppGreen,
+              icon: Assets.ambulancePng,
+              buttonText: 'Ambulance',
+              onTap: () async {
+                await context
+                    .read<IncidentProvider>()
+                    .getIncidentList(categoryId: AlertType.ambulance.id);
+                if (context.mounted) {
+                  context.goNamed(Routes.alertAdd, extra: AlertType.ambulance);
+                }
+              },
+            )),
+          ],
+        ),
+        24.gapH,
+        const Expanded(child: RecentSectionWidget()),
+      ],
+    );
+  }
+}

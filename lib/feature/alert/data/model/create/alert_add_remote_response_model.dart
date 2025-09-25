@@ -1,0 +1,30 @@
+class AlertAddRemoteResponseModel {
+  AlertAddRemoteResponseModel({
+    this.success,
+    this.message,
+  });
+
+  AlertAddRemoteResponseModel.fromJson(dynamic json) {
+    success = json['success'];
+    message = json['message'];
+  }
+
+  bool? success;
+  String? message;
+
+  AlertAddRemoteResponseModel copyWith({
+    bool? success,
+    String? message,
+  }) =>
+      AlertAddRemoteResponseModel(
+        success: success ?? this.success,
+        message: message ?? this.message,
+      );
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['success'] = success;
+    map['message'] = message;
+    return map;
+  }
+}

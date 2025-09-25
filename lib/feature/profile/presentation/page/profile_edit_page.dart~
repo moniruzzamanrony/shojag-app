@@ -1,0 +1,399 @@
+/*
+* ui : profile update/edit page
+*/
+
+import 'package:app/core/utils/enums/message_type.dart';
+import 'package:app/core/utils/enums/user_type.dart';
+import 'package:app/core/utils/extension/context_extension.dart';
+import 'package:app/core/utils/extension/date_time_extension.dart';
+import 'package:app/core/utils/extension/number_extension.dart';
+import 'package:app/core/utils/helper/datetime_helper.dart';
+import 'package:app/core/utils/helper/helper_functions.dart';
+import 'package:app/core/utils/validator/field_validators.dart';
+import 'package:app/feature/common/presentation/provider/session_provider.dart';
+import 'package:app/shared/widget/background.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/config/theme/app_colors.dart';
+import '../../../../core/utils/enums/gender.dart';
+import '../../../../core/utils/style/styles.dart';
+import '../../../../shared/widget/error_text_widget.dart';
+import '../../../auth/presentation/widget/custom_app_bar.dart';
+import '../../../common/presentation/widget/colored_background_button.dart';
+import '../provider/profile_provider.dart';
+import '../widget/profile_edit_text_field.dart';
+
+class ProfileEditPage extends StatelessWidget {
+  const ProfileEditPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return HomeBackground(
+      child: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar(title: 'Edit Profile'),
+            Expanded(
+              child: CurvedBottomBackground(
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  decoration: BoxDecoration(
+                    color: AppColors.colorWhite,
+                    borderRadius: curvedTopBorderRadius,
+                  ),
+                  child: const __ProfileFieldSection(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class __ProfileFieldSection extends StatefulWidget {
+  const __ProfileFieldSection({super.key});
+
+  @override
+  State<__ProfileFieldSection> createState() => __ProfileFieldSectionState();
+}
+
+class __ProfileFieldSectionState extends State<__ProfileFieldSection> {
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _lastNameController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _dobController;
+  late final TextEditingController _nidController;
+  late final TextEditingController _addressController;
+  Gender? _selectedGender;
+
+  DateTime? _selectedDate;
+
+  late final GlobalKey<FormState> _formKey;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formKey = GlobalKey<FormState>();
+
+    _firstNameController = TextEditingController(text: context.firstName);
+    _lastNameController = TextEditingController(text: context.lastName);
+    _emailController = TextEditingController(text: context.email);
+    _phoneController = TextEditingController(text: context.phone);
+    _dobController = TextEditingController(
+        text: context.dob?.formatDate(pattern: pattern_dd_MM_yyyy));
+    _nidController = TextEditingController(text: context.nid);
+    _addressController = TextEditingController(text: context.address);
+
+    _selectedGender = context.gender;
+    _selectedDate = context.dob;
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _dobController.dispose();
+    _nidController.dispose();
+    _addressController.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext c) {
+    return Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            32.gapH,
+            Row(
+              children: [
+                Expanded(
+                  child: ProfileEditTextField(
+                    controller: _firstNameController,
+                    hintText: 'First name',
+                    labelText: 'First Name',
+                    validator: (p0) {
+                      return FieldValidators.customEmptyOrNullValidator!(p0,
+                          fieldName: 'First name');
+                    },
+                    suffixIcon: const Icon(Icons.person_outline),
+                  ),
+                ),
+                10.gapW,
+                Expanded(
+                  child: ProfileEditTextField(
+                    controller: _lastNameController,
+                    hintText: 'Last name',
+                    labelText: 'Last Name',
+                    suffixIcon: const Icon(Icons.person_outline),
+                    validator: (p0) {
+                      return FieldValidators.customEmptyOrNullValidator!(p0,
+                          fieldName: 'Last name');
+                    },
+                  ),
+                ),
+              ],
+            ),
+            _itemGap(),
+            ProfileEditTextField(
+              controller: _emailController,
+              hintText: 'Enter your email',
+              labelText: 'Email',
+              validator: FieldValidators.emailNullableValidator,
+              suffixIcon: const Icon(Icons.email_outlined),
+            ),
+            _itemGap(),
+            ProfileEditTextField(
+              controller: _phoneController,
+              validator: FieldValidators.phoneValidator,
+              hintText: 'Enter your phone',
+              labelText: 'Phone',
+              suffixIcon: const Icon(Icons.phone),
+            ),
+            _itemGap(),
+            ProfileEditTextField(
+              controller: _dobController,
+              readOnly: true,
+              hintText: 'Enter your date of birth',
+              labelText: 'Date of Birth',
+              suffixIcon: const Icon(Icons.calendar_month_outlined),
+              onTap: () async {
+                final date = await showDatePicker(
+                  context: context,
+                  initialDate: context.dob,
+                  firstDate: DateTime(1930),
+                  lastDate: DateTime.now(),
+                );
+                _selectedDate = date;
+
+                _dobController.text =
+                    date?.formatDate(pattern: pattern_dd_MM_yyyy) ?? '';
+              },
+            ),
+            _itemGap(),
+            ProfileEditTextField(
+              controller: _nidController,
+              hintText: 'Enter your NID number',
+              labelText: 'NID',
+              suffixIcon: const Icon(Icons.numbers_outlined),
+            ),
+            _itemGap(),
+            if (context.userType == UserType.citizen) ...[
+              __ProfileGenderSection(
+                onChanged: (v) {
+                  setState(() {
+                    _selectedGender = v;
+                  });
+                },
+                selectedGender: _selectedGender,
+              ),
+              _itemGap(),
+            ],
+            ProfileEditTextField(
+              controller: _addressController,
+              hintText: 'Enter your address',
+              labelText: 'Address',
+              suffixIcon: const Icon(Icons.location_on_outlined),
+            ),
+            _itemGap(),
+            Selector<ProfileProvider, bool>(
+              selector: (_, provider) => provider.isProfileUpdating,
+              builder: (_, value, __) => value
+                  ? CircularProgressIndicator()
+                  : ColoredBackgroundButton(
+                      onPressed: () {
+                        _updateProfile(context);
+                      },
+                      text: 'Save Changes',
+                      buttonColor: ColoredButtonType.green),
+            ),
+            _itemGap(),
+            Selector<ProfileProvider, String?>(
+              selector: (_, provider) => provider.errorMessage,
+              builder: (_, errorText, __) =>
+                  ErrorTextWidget(errorText: errorText),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _itemGap() => 16.gapH;
+
+  void _updateProfile(BuildContext ctx) async {
+    final profileProvider = ctx.read<ProfileProvider>();
+    profileProvider.setErrorMessage('');
+
+    if (FocusScope.of(context).hasFocus) {
+      FocusScope.of(context).unfocus();
+    }
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    final sessionProvider = ctx.read<SessionProvider>();
+    final firstName = _firstNameController.text;
+    final lastName = _lastNameController.text;
+    final email = _emailController.text;
+    final phone = _phoneController.text;
+    final dob = _selectedDate?.formatDate(pattern: pattern_YYYYMMdd);
+    final nid = _nidController.text;
+    final address = _addressController.text;
+
+    final updatedEntity = await profileProvider
+        .updateProfile(
+            userId: ctx.userId,
+            token: ctx.apiToken,
+            gender: _selectedGender?.title,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+            dob: dob,
+            nid: nid,
+            address: address)
+        .onError(
+      (error, stackTrace) {
+        profileProvider.setErrorMessage(error.toString());
+        return null;
+      },
+    );
+
+    if (updatedEntity != null) {
+      await sessionProvider.updateProfileInfoSession(
+        firstName: updatedEntity.firstName,
+        lastName: updatedEntity.lastName,
+        gender: updatedEntity.gender == null
+            ? null
+            : Gender.fromTitle(updatedEntity.gender!),
+        dob: getDateTimeFromString(date: updatedEntity.dob),
+        nid: updatedEntity.nid,
+        address: updatedEntity.address,
+      );
+
+      if (ctx.mounted) {
+        ctx.pop();
+        showAppSnackBar(ctx, 'Profile Update Success',
+            type: MessageType.normal);
+      }
+    }
+  }
+}
+
+class __ProfileGenderSection extends StatefulWidget {
+  final void Function(Gender?)? onChanged;
+  final Gender? selectedGender;
+
+  const __ProfileGenderSection(
+      {super.key, this.onChanged, this.selectedGender});
+
+  @override
+  State<__ProfileGenderSection> createState() => __ProfileGenderSectionState();
+}
+
+class __ProfileGenderSectionState extends State<__ProfileGenderSection> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _controller.text = widget.selectedGender?.title ?? '';
+    return DropdownButtonHideUnderline(
+      child: DropdownButton2<Gender>(
+        isExpanded: true,
+        customButton: ProfileEditTextField(
+          hintText: 'Select your gender',
+          labelText: 'Gender',
+          controller: _controller,
+          //initialText: widget.selectedGender?.title,
+          enabled: false,
+          suffixIcon: const Icon(Icons.legend_toggle),
+        ),
+        style: TextStyle(
+            fontSize: 12.sp, height: 1, color: context.colorScheme.primary),
+        items: Gender.list
+            .map((item) => DropdownMenuItem<Gender>(
+                  value: item,
+                  child: Text(
+                    item.title,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ))
+            .toList(),
+        value: widget.selectedGender,
+        onChanged: (value) {
+          widget.onChanged?.call(value);
+        },
+        buttonStyleData: ButtonStyleData(
+          padding: EdgeInsets.only(top: 6.h, bottom: 6.h, left: 0, right: 14.w),
+          height: 40.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.r),
+            border: Border.all(
+              color: AppColors.colorAppGrey,
+            ),
+            color: Colors.white,
+          ),
+          elevation: 0,
+        ),
+        iconStyleData: IconStyleData(
+          icon: const Icon(
+            Icons.keyboard_arrow_down,
+          ),
+          iconSize: 16.r,
+          iconEnabledColor: AppColors.colorAppGrey,
+          iconDisabledColor: AppColors.colorAppGrey,
+        ),
+        dropdownStyleData: DropdownStyleData(
+          maxHeight: 200.h,
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 6.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+            color: Colors.white,
+          ),
+          scrollbarTheme: ScrollbarThemeData(
+            radius: Radius.circular(40.r),
+            thickness: WidgetStateProperty.all<double>(3),
+            thumbVisibility: WidgetStateProperty.all<bool>(true),
+          ),
+        ),
+        menuItemStyleData: MenuItemStyleData(
+            height: 32.h,
+            selectedMenuItemBuilder: (context, child) => ColoredBox(
+                  color: context.colorScheme.primary.withAlpha(30),
+                  child: child,
+                ),
+            padding: EdgeInsets.symmetric(horizontal: 6.r)),
+      ),
+    );
+  }
+}
