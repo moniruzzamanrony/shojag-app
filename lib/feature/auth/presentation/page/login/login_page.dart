@@ -172,7 +172,7 @@ class _LoginFormState extends State<_LoginForm> {
           isPhoneVerified: user.isPhoneVerified,
           hospitalOrAgency: user.hospitalOrAgency,
           policeId: user.policeId,
-          thana: user.thana,
+          // thana: user.thana,
           fireStation: user.fireStation,
           userType: user.userType.id,
           nid: user.nid,

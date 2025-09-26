@@ -93,11 +93,11 @@ class _FormPoliceRegState extends State<FormPoliceReg> {
           _itemSeparator(),
           RegEmpIdWidget(empIdController: _policeIdController)
               .animate(key: UniqueKey(), delay: delay1, effects: effects),
-          _itemSeparator(),
+          /*_itemSeparator(),
           RegThanaWidget(
             thanaController: _organizationController,
             hintText: context.language.thana,
-          ).animate(key: UniqueKey(), delay: delay1, effects: effects),
+          ).animate(key: UniqueKey(), delay: delay1, effects: effects),*/
           _itemSeparator(),
           RegEmailWidget(emailController: _emailController)
               .animate(key: UniqueKey(), delay: delay1, effects: effects),

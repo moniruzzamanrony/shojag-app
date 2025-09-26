@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                   buttonText: context.language.community,
                   buttonType: AlertType.community,
                 )),
-                Expanded(
+                /*Expanded(
                     child: HomeButtonWidget(
                   key: TutorialKeys.policeButtonKey,
                   backgroundColor: AppColors.policeCardColor,
@@ -112,7 +112,7 @@ class HomePage extends StatelessWidget {
                   icon: Assets.ambulanceSvg,
                   buttonText: context.language.ambulance,
                   buttonType: AlertType.ambulance,
-                )),
+                )),*/
               ],
             ),
           ],

@@ -10,8 +10,8 @@
 ///
 enum UserType {
   none(0, 'none', 'None', 'নাই'),
-  citizen(1, 'citizen', 'Citizen', 'সিটিজেন'),
-  police(2, 'police', 'Police', 'পুলিশ'),
+  citizen(1, 'citizen', 'Field Officer', 'ফিল্ড অফিসার'), // previously citizen
+  police(2, 'police', 'Officer', 'অফিসার'), // previously police
   fireService(3, 'fire_service', 'Fire Service', 'ফায়ার সার্ভিস'),
   ambulance(4, 'ambulance', 'Ambulance', 'অ্যাম্বুলেন্স');
 

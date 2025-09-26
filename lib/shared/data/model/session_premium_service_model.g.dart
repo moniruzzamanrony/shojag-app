@@ -9,7 +9,7 @@ part of 'session_premium_service_model.dart';
 class SessionPremiumServiceModelAdapter
     extends TypeAdapter<SessionPremiumServiceModel> {
   @override
-  final int typeId = 107;
+  final typeId = 107;
 
   @override
   SessionPremiumServiceModel read(BinaryReader reader) {

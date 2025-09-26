@@ -107,7 +107,7 @@ abstract class AppLocalizations {
   /// No description provided for @citizen.
   ///
   /// In en, this message translates to:
-  /// **'Citizen'**
+  /// **'Field Officer'**
   String get citizen;
 
   /// No description provided for @community.
@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// No description provided for @police.
   ///
   /// In en, this message translates to:
-  /// **'Police'**
+  /// **'Officer'**
   String get police;
 
   /// No description provided for @ambulance.

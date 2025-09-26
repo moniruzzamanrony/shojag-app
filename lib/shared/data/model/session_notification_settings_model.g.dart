@@ -9,7 +9,7 @@ part of 'session_notification_settings_model.dart';
 class SessionNotificationSettingsModelAdapter
     extends TypeAdapter<SessionNotificationSettingsModel> {
   @override
-  final int typeId = 104;
+  final typeId = 104;
 
   @override
   SessionNotificationSettingsModel read(BinaryReader reader) {

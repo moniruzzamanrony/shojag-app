@@ -8,7 +8,7 @@ part of 'session_language_model.dart';
 
 class SessionLanguageModelAdapter extends TypeAdapter<SessionLanguageModel> {
   @override
-  final int typeId = 103;
+  final typeId = 103;
 
   @override
   SessionLanguageModel read(BinaryReader reader) {

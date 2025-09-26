@@ -187,7 +187,7 @@ class RegButtonWidget extends StatelessWidget {
           isPhoneVerified: user.isPhoneVerified,
           hospitalOrAgency: user.hospitalOrAgency,
           policeId: user.policeId,
-          thana: user.thana,
+          // thana: user.thana,
           fireStation: user.fireStation,
           userType: user.userType.id,
           nid: user.nid,

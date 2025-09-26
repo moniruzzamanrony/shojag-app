@@ -9,7 +9,7 @@ part of 'session_list_sort_type_model.dart';
 class SessionListSortTypeModelAdapter
     extends TypeAdapter<SessionListSortTypeModel> {
   @override
-  final int typeId = 106;
+  final typeId = 106;
 
   @override
   SessionListSortTypeModel read(BinaryReader reader) {

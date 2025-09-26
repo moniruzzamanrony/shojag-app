@@ -62,7 +62,7 @@ class SessionProvider extends BaseProvider {
     String? nid,
     String? address,
     String? photo,
-    String? thana,
+    // String? thana,
     String? policeId,
     String? hospitalOrAgency,
     String? fireStation,
@@ -82,7 +82,7 @@ class SessionProvider extends BaseProvider {
         nid: nid,
         photo: photo,
         userType: userType,
-        thana: thana,
+        // thana: thana,
         policeId: policeId,
         hospitalOrAgency: hospitalOrAgency,
         fireStation: fireStation,
@@ -126,7 +126,7 @@ class SessionProvider extends BaseProvider {
       case UserType.police:
         final previousPolice = previousUser as UserPolice;
         updatedParam = updatedParam.copyWith(
-            policeId: previousPolice.policeId, thana: previousPolice.thana);
+             policeId: previousPolice.policeId,); // thana: previousPolice.thana
         break;
       case UserType.fireService:
         final updatedFireService = previousUser as UserFireService;
@@ -164,7 +164,7 @@ class SessionProvider extends BaseProvider {
       firstName: entity.firstName,
       lastName: entity.lastName,
       email: entity.email,
-      thana: entity.thana,
+      // thana: entity.thana,
     );
 
     switch (previousUser.userType) {

@@ -8,7 +8,7 @@ part of 'session_auth_model.dart';
 
 class SessionAuthModelAdapter extends TypeAdapter<SessionAuthModel> {
   @override
-  final int typeId = 101;
+  final typeId = 101;
 
   @override
   SessionAuthModel read(BinaryReader reader) {
@@ -18,8 +18,8 @@ class SessionAuthModelAdapter extends TypeAdapter<SessionAuthModel> {
     };
     return SessionAuthModel(
       loginStatus: fields[0] == null ? false : fields[0] as bool,
-      userId: fields[1] == null ? 0 : fields[1] as int,
-      userType: fields[2] == null ? 0 : fields[2] as int,
+      userId: fields[1] == null ? 0 : (fields[1] as num).toInt(),
+      userType: fields[2] == null ? 0 : (fields[2] as num).toInt(),
       apiToken: fields[3] == null ? '' : fields[3] as String,
       firstName: fields[4] == null ? '' : fields[4] as String,
       lastName: fields[5] == null ? '' : fields[5] as String,

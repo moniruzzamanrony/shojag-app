@@ -12,13 +12,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get app_title => 'সজাগ';
 
   @override
-  String get citizen => 'সিটিজেন';
+  String get citizen => 'ফিল্ড অফিসার';
 
   @override
   String get community => 'কমিউনিটি';
 
   @override
-  String get police => 'পুলিশ';
+  String get police => 'অফিসার';
 
   @override
   String get ambulance => 'আম্বুলেন্স';

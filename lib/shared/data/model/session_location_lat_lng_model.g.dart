@@ -9,7 +9,7 @@ part of 'session_location_lat_lng_model.dart';
 class SessionLocationLatLngModelAdapter
     extends TypeAdapter<SessionLocationLatLngModel> {
   @override
-  final int typeId = 102;
+  final typeId = 102;
 
   @override
   SessionLocationLatLngModel read(BinaryReader reader) {
@@ -18,8 +18,8 @@ class SessionLocationLatLngModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SessionLocationLatLngModel(
-      latitude: fields[0] == null ? 0 : fields[0] as double,
-      longitude: fields[1] == null ? 0 : fields[1] as double,
+      latitude: fields[0] == null ? 0 : (fields[0] as num).toDouble(),
+      longitude: fields[1] == null ? 0 : (fields[1] as num).toDouble(),
     );
   }
 

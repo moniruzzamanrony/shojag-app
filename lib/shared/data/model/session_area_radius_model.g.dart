@@ -9,7 +9,7 @@ part of 'session_area_radius_model.dart';
 class SessionAreaRadiusModelAdapter
     extends TypeAdapter<SessionAreaRadiusModel> {
   @override
-  final int typeId = 105;
+  final typeId = 105;
 
   @override
   SessionAreaRadiusModel read(BinaryReader reader) {

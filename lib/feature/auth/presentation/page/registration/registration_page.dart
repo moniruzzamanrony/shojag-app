@@ -190,7 +190,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               isSelected: value == UserType.police,
               title: ctx.language.police,
             )),
-            8.gapW,
+            /*8.gapW,
             Expanded(
                 child: RegUserTypeWidget(
               userType: UserType.fireService,
@@ -203,7 +203,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               userType: UserType.ambulance,
               isSelected: value == UserType.ambulance,
               title: ctx.language.ambulance,
-            )),
+            )),*/
           ],
         ),
       );

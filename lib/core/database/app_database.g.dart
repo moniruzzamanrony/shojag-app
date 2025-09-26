@@ -12,61 +12,103 @@ class $TableIncidentTable extends TableIncident
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _categoryIdMeta =
-      const VerificationMeta('categoryId');
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
+    'categoryId',
+  );
   @override
   late final GeneratedColumn<int> categoryId = GeneratedColumn<int>(
-      'category_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _titleEnMeta =
-      const VerificationMeta('titleEn');
+    'category_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleEnMeta = const VerificationMeta(
+    'titleEn',
+  );
   @override
   late final GeneratedColumn<String> titleEn = GeneratedColumn<String>(
-      'title_en', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _titleBnMeta =
-      const VerificationMeta('titleBn');
+    'title_en',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleBnMeta = const VerificationMeta(
+    'titleBn',
+  );
   @override
   late final GeneratedColumn<String> titleBn = GeneratedColumn<String>(
-      'title_bn', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'title_bn',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _tagsMeta = const VerificationMeta('tags');
   @override
   late final GeneratedColumn<String> tags = GeneratedColumn<String>(
-      'tags', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _descriptionMeta =
-      const VerificationMeta('description');
+    'tags',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _descriptionMeta = const VerificationMeta(
+    'description',
+  );
   @override
   late final GeneratedColumn<String> description = GeneratedColumn<String>(
-      'description', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _isOnlineMeta =
-      const VerificationMeta('isOnline');
+    'description',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _isOnlineMeta = const VerificationMeta(
+    'isOnline',
+  );
   @override
   late final GeneratedColumn<bool> isOnline = GeneratedColumn<bool>(
-      'is_online', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("is_online" IN (0, 1))'));
+    'is_online',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_online" IN (0, 1))',
+    ),
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, categoryId, titleEn, titleBn, tags, description, isOnline];
+  List<GeneratedColumn> get $columns => [
+    id,
+    categoryId,
+    titleEn,
+    titleBn,
+    tags,
+    description,
+    isOnline,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'table_incident';
   @override
-  VerificationContext validateIntegrity(Insertable<TableIncidentData> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<TableIncidentData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -74,39 +116,50 @@ class $TableIncidentTable extends TableIncident
     }
     if (data.containsKey('category_id')) {
       context.handle(
-          _categoryIdMeta,
-          categoryId.isAcceptableOrUnknown(
-              data['category_id']!, _categoryIdMeta));
+        _categoryIdMeta,
+        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_categoryIdMeta);
     }
     if (data.containsKey('title_en')) {
-      context.handle(_titleEnMeta,
-          titleEn.isAcceptableOrUnknown(data['title_en']!, _titleEnMeta));
+      context.handle(
+        _titleEnMeta,
+        titleEn.isAcceptableOrUnknown(data['title_en']!, _titleEnMeta),
+      );
     } else if (isInserting) {
       context.missing(_titleEnMeta);
     }
     if (data.containsKey('title_bn')) {
-      context.handle(_titleBnMeta,
-          titleBn.isAcceptableOrUnknown(data['title_bn']!, _titleBnMeta));
+      context.handle(
+        _titleBnMeta,
+        titleBn.isAcceptableOrUnknown(data['title_bn']!, _titleBnMeta),
+      );
     } else if (isInserting) {
       context.missing(_titleBnMeta);
     }
     if (data.containsKey('tags')) {
       context.handle(
-          _tagsMeta, tags.isAcceptableOrUnknown(data['tags']!, _tagsMeta));
+        _tagsMeta,
+        tags.isAcceptableOrUnknown(data['tags']!, _tagsMeta),
+      );
     } else if (isInserting) {
       context.missing(_tagsMeta);
     }
     if (data.containsKey('description')) {
       context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
           _descriptionMeta,
-          description.isAcceptableOrUnknown(
-              data['description']!, _descriptionMeta));
+        ),
+      );
     }
     if (data.containsKey('is_online')) {
-      context.handle(_isOnlineMeta,
-          isOnline.isAcceptableOrUnknown(data['is_online']!, _isOnlineMeta));
+      context.handle(
+        _isOnlineMeta,
+        isOnline.isAcceptableOrUnknown(data['is_online']!, _isOnlineMeta),
+      );
     } else if (isInserting) {
       context.missing(_isOnlineMeta);
     }
@@ -119,20 +172,34 @@ class $TableIncidentTable extends TableIncident
   TableIncidentData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return TableIncidentData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      categoryId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}category_id'])!,
-      titleEn: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title_en'])!,
-      titleBn: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title_bn'])!,
-      tags: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}tags'])!,
-      description: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}description']),
-      isOnline: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_online'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      categoryId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}category_id'],
+      )!,
+      titleEn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title_en'],
+      )!,
+      titleBn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title_bn'],
+      )!,
+      tags: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tags'],
+      )!,
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      ),
+      isOnline: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_online'],
+      )!,
     );
   }
 
@@ -151,14 +218,15 @@ class TableIncidentData extends DataClass
   final String tags;
   final String? description;
   final bool isOnline;
-  const TableIncidentData(
-      {required this.id,
-      required this.categoryId,
-      required this.titleEn,
-      required this.titleBn,
-      required this.tags,
-      this.description,
-      required this.isOnline});
+  const TableIncidentData({
+    required this.id,
+    required this.categoryId,
+    required this.titleEn,
+    required this.titleBn,
+    required this.tags,
+    this.description,
+    required this.isOnline,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -188,8 +256,10 @@ class TableIncidentData extends DataClass
     );
   }
 
-  factory TableIncidentData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory TableIncidentData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return TableIncidentData(
       id: serializer.fromJson<int>(json['id']),
@@ -215,33 +285,35 @@ class TableIncidentData extends DataClass
     };
   }
 
-  TableIncidentData copyWith(
-          {int? id,
-          int? categoryId,
-          String? titleEn,
-          String? titleBn,
-          String? tags,
-          Value<String?> description = const Value.absent(),
-          bool? isOnline}) =>
-      TableIncidentData(
-        id: id ?? this.id,
-        categoryId: categoryId ?? this.categoryId,
-        titleEn: titleEn ?? this.titleEn,
-        titleBn: titleBn ?? this.titleBn,
-        tags: tags ?? this.tags,
-        description: description.present ? description.value : this.description,
-        isOnline: isOnline ?? this.isOnline,
-      );
+  TableIncidentData copyWith({
+    int? id,
+    int? categoryId,
+    String? titleEn,
+    String? titleBn,
+    String? tags,
+    Value<String?> description = const Value.absent(),
+    bool? isOnline,
+  }) => TableIncidentData(
+    id: id ?? this.id,
+    categoryId: categoryId ?? this.categoryId,
+    titleEn: titleEn ?? this.titleEn,
+    titleBn: titleBn ?? this.titleBn,
+    tags: tags ?? this.tags,
+    description: description.present ? description.value : this.description,
+    isOnline: isOnline ?? this.isOnline,
+  );
   TableIncidentData copyWithCompanion(TableIncidentCompanion data) {
     return TableIncidentData(
       id: data.id.present ? data.id.value : this.id,
-      categoryId:
-          data.categoryId.present ? data.categoryId.value : this.categoryId,
+      categoryId: data.categoryId.present
+          ? data.categoryId.value
+          : this.categoryId,
       titleEn: data.titleEn.present ? data.titleEn.value : this.titleEn,
       titleBn: data.titleBn.present ? data.titleBn.value : this.titleBn,
       tags: data.tags.present ? data.tags.value : this.tags,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isOnline: data.isOnline.present ? data.isOnline.value : this.isOnline,
     );
   }
@@ -262,7 +334,14 @@ class TableIncidentData extends DataClass
 
   @override
   int get hashCode => Object.hash(
-      id, categoryId, titleEn, titleBn, tags, description, isOnline);
+    id,
+    categoryId,
+    titleEn,
+    titleBn,
+    tags,
+    description,
+    isOnline,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -301,11 +380,11 @@ class TableIncidentCompanion extends UpdateCompanion<TableIncidentData> {
     required String tags,
     this.description = const Value.absent(),
     required bool isOnline,
-  })  : categoryId = Value(categoryId),
-        titleEn = Value(titleEn),
-        titleBn = Value(titleBn),
-        tags = Value(tags),
-        isOnline = Value(isOnline);
+  }) : categoryId = Value(categoryId),
+       titleEn = Value(titleEn),
+       titleBn = Value(titleBn),
+       tags = Value(tags),
+       isOnline = Value(isOnline);
   static Insertable<TableIncidentData> custom({
     Expression<int>? id,
     Expression<int>? categoryId,
@@ -326,14 +405,15 @@ class TableIncidentCompanion extends UpdateCompanion<TableIncidentData> {
     });
   }
 
-  TableIncidentCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? categoryId,
-      Value<String>? titleEn,
-      Value<String>? titleBn,
-      Value<String>? tags,
-      Value<String?>? description,
-      Value<bool>? isOnline}) {
+  TableIncidentCompanion copyWith({
+    Value<int>? id,
+    Value<int>? categoryId,
+    Value<String>? titleEn,
+    Value<String>? titleBn,
+    Value<String>? tags,
+    Value<String?>? description,
+    Value<bool>? isOnline,
+  }) {
     return TableIncidentCompanion(
       id: id ?? this.id,
       categoryId: categoryId ?? this.categoryId,
@@ -398,26 +478,26 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [tableIncident];
 }
 
-typedef $$TableIncidentTableCreateCompanionBuilder = TableIncidentCompanion
-    Function({
-  Value<int> id,
-  required int categoryId,
-  required String titleEn,
-  required String titleBn,
-  required String tags,
-  Value<String?> description,
-  required bool isOnline,
-});
-typedef $$TableIncidentTableUpdateCompanionBuilder = TableIncidentCompanion
-    Function({
-  Value<int> id,
-  Value<int> categoryId,
-  Value<String> titleEn,
-  Value<String> titleBn,
-  Value<String> tags,
-  Value<String?> description,
-  Value<bool> isOnline,
-});
+typedef $$TableIncidentTableCreateCompanionBuilder =
+    TableIncidentCompanion Function({
+      Value<int> id,
+      required int categoryId,
+      required String titleEn,
+      required String titleBn,
+      required String tags,
+      Value<String?> description,
+      required bool isOnline,
+    });
+typedef $$TableIncidentTableUpdateCompanionBuilder =
+    TableIncidentCompanion Function({
+      Value<int> id,
+      Value<int> categoryId,
+      Value<String> titleEn,
+      Value<String> titleBn,
+      Value<String> tags,
+      Value<String?> description,
+      Value<bool> isOnline,
+    });
 
 class $$TableIncidentTableFilterComposer
     extends Composer<_$AppDatabase, $TableIncidentTable> {
@@ -429,25 +509,39 @@ class $$TableIncidentTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get categoryId => $composableBuilder(
-      column: $table.categoryId, builder: (column) => ColumnFilters(column));
+    column: $table.categoryId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get titleEn => $composableBuilder(
-      column: $table.titleEn, builder: (column) => ColumnFilters(column));
+    column: $table.titleEn,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get titleBn => $composableBuilder(
-      column: $table.titleBn, builder: (column) => ColumnFilters(column));
+    column: $table.titleBn,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get tags => $composableBuilder(
-      column: $table.tags, builder: (column) => ColumnFilters(column));
+    column: $table.tags,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => ColumnFilters(column));
+    column: $table.description,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get isOnline => $composableBuilder(
-      column: $table.isOnline, builder: (column) => ColumnFilters(column));
+    column: $table.isOnline,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$TableIncidentTableOrderingComposer
@@ -460,25 +554,39 @@ class $$TableIncidentTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get categoryId => $composableBuilder(
-      column: $table.categoryId, builder: (column) => ColumnOrderings(column));
+    column: $table.categoryId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get titleEn => $composableBuilder(
-      column: $table.titleEn, builder: (column) => ColumnOrderings(column));
+    column: $table.titleEn,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get titleBn => $composableBuilder(
-      column: $table.titleBn, builder: (column) => ColumnOrderings(column));
+    column: $table.titleBn,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get tags => $composableBuilder(
-      column: $table.tags, builder: (column) => ColumnOrderings(column));
+    column: $table.tags,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => ColumnOrderings(column));
+    column: $table.description,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get isOnline => $composableBuilder(
-      column: $table.isOnline, builder: (column) => ColumnOrderings(column));
+    column: $table.isOnline,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$TableIncidentTableAnnotationComposer
@@ -494,7 +602,9 @@ class $$TableIncidentTableAnnotationComposer
       $composableBuilder(column: $table.id, builder: (column) => column);
 
   GeneratedColumn<int> get categoryId => $composableBuilder(
-      column: $table.categoryId, builder: (column) => column);
+    column: $table.categoryId,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get titleEn =>
       $composableBuilder(column: $table.titleEn, builder: (column) => column);
@@ -506,29 +616,39 @@ class $$TableIncidentTableAnnotationComposer
       $composableBuilder(column: $table.tags, builder: (column) => column);
 
   GeneratedColumn<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => column);
+    column: $table.description,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<bool> get isOnline =>
       $composableBuilder(column: $table.isOnline, builder: (column) => column);
 }
 
-class $$TableIncidentTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $TableIncidentTable,
-    TableIncidentData,
-    $$TableIncidentTableFilterComposer,
-    $$TableIncidentTableOrderingComposer,
-    $$TableIncidentTableAnnotationComposer,
-    $$TableIncidentTableCreateCompanionBuilder,
-    $$TableIncidentTableUpdateCompanionBuilder,
-    (
-      TableIncidentData,
-      BaseReferences<_$AppDatabase, $TableIncidentTable, TableIncidentData>
-    ),
-    TableIncidentData,
-    PrefetchHooks Function()> {
+class $$TableIncidentTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $TableIncidentTable,
+          TableIncidentData,
+          $$TableIncidentTableFilterComposer,
+          $$TableIncidentTableOrderingComposer,
+          $$TableIncidentTableAnnotationComposer,
+          $$TableIncidentTableCreateCompanionBuilder,
+          $$TableIncidentTableUpdateCompanionBuilder,
+          (
+            TableIncidentData,
+            BaseReferences<
+              _$AppDatabase,
+              $TableIncidentTable,
+              TableIncidentData
+            >,
+          ),
+          TableIncidentData,
+          PrefetchHooks Function()
+        > {
   $$TableIncidentTableTableManager(_$AppDatabase db, $TableIncidentTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -537,64 +657,67 @@ class $$TableIncidentTableTableManager extends RootTableManager<
               $$TableIncidentTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$TableIncidentTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<int> categoryId = const Value.absent(),
-            Value<String> titleEn = const Value.absent(),
-            Value<String> titleBn = const Value.absent(),
-            Value<String> tags = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<bool> isOnline = const Value.absent(),
-          }) =>
-              TableIncidentCompanion(
-            id: id,
-            categoryId: categoryId,
-            titleEn: titleEn,
-            titleBn: titleBn,
-            tags: tags,
-            description: description,
-            isOnline: isOnline,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required int categoryId,
-            required String titleEn,
-            required String titleBn,
-            required String tags,
-            Value<String?> description = const Value.absent(),
-            required bool isOnline,
-          }) =>
-              TableIncidentCompanion.insert(
-            id: id,
-            categoryId: categoryId,
-            titleEn: titleEn,
-            titleBn: titleBn,
-            tags: tags,
-            description: description,
-            isOnline: isOnline,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> categoryId = const Value.absent(),
+                Value<String> titleEn = const Value.absent(),
+                Value<String> titleBn = const Value.absent(),
+                Value<String> tags = const Value.absent(),
+                Value<String?> description = const Value.absent(),
+                Value<bool> isOnline = const Value.absent(),
+              }) => TableIncidentCompanion(
+                id: id,
+                categoryId: categoryId,
+                titleEn: titleEn,
+                titleBn: titleBn,
+                tags: tags,
+                description: description,
+                isOnline: isOnline,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int categoryId,
+                required String titleEn,
+                required String titleBn,
+                required String tags,
+                Value<String?> description = const Value.absent(),
+                required bool isOnline,
+              }) => TableIncidentCompanion.insert(
+                id: id,
+                categoryId: categoryId,
+                titleEn: titleEn,
+                titleBn: titleBn,
+                tags: tags,
+                description: description,
+                isOnline: isOnline,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$TableIncidentTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $TableIncidentTable,
-    TableIncidentData,
-    $$TableIncidentTableFilterComposer,
-    $$TableIncidentTableOrderingComposer,
-    $$TableIncidentTableAnnotationComposer,
-    $$TableIncidentTableCreateCompanionBuilder,
-    $$TableIncidentTableUpdateCompanionBuilder,
-    (
+typedef $$TableIncidentTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $TableIncidentTable,
       TableIncidentData,
-      BaseReferences<_$AppDatabase, $TableIncidentTable, TableIncidentData>
-    ),
-    TableIncidentData,
-    PrefetchHooks Function()>;
+      $$TableIncidentTableFilterComposer,
+      $$TableIncidentTableOrderingComposer,
+      $$TableIncidentTableAnnotationComposer,
+      $$TableIncidentTableCreateCompanionBuilder,
+      $$TableIncidentTableUpdateCompanionBuilder,
+      (
+        TableIncidentData,
+        BaseReferences<_$AppDatabase, $TableIncidentTable, TableIncidentData>,
+      ),
+      TableIncidentData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

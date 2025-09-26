@@ -12,13 +12,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_title => 'Shojag';
 
   @override
-  String get citizen => 'Citizen';
+  String get citizen => 'Field Officer';
 
   @override
   String get community => 'Community';
 
   @override
-  String get police => 'Police';
+  String get police => 'Officer';
 
   @override
   String get ambulance => 'Ambulance';
