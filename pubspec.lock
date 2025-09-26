@@ -854,9 +854,11 @@ packages:
   flutter_sslcommerz:
     dependency: "direct main"
     description:
-      path: "/Users/supreoxlimited2/StudioProjects/package-update/flutter_sslcommerz-2.3.6"
-      relative: false
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: "023c59ce524700d7de1d52d4ae209f0f5e59bc67"
+      url: "https://github.com/SamratAlShahriar/flutter_sslcommerz.git"
+    source: git
     version: "2.3.6"
   flutter_svg:
     dependency: "direct main"
@@ -2076,9 +2078,11 @@ packages:
   tutorial_coach_mark:
     dependency: "direct main"
     description:
-      path: "/Users/supreoxlimited2/StudioProjects/package-update/tutorial_coach_mark-1.2.13"
-      relative: false
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: "89b6fa7ba742ccf7530cd64359205315697b68e0"
+      url: "https://github.com/SamratAlShahriar/tutorial_coach_mark.git"
+    source: git
     version: "1.2.13"
   typed_data:
     dependency: transitive

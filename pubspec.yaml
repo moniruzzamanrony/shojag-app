@@ -91,12 +91,12 @@ dependencies:
   styled_text: ^8.1.0
   custom_refresh_indicator: ^4.0.1
   skeletonizer: ^2.1.0+1
-  tutorial_coach_mark:
-    path: /Users/supreoxlimited2/StudioProjects/package-update/tutorial_coach_mark-1.2.13
 #  tutorial_coach_mark:
-#    git:
-#      url: https://github.com/SamratAlShahriar/tutorial_coach_mark.git
-#      ref: main
+#    path: /Users/supreoxlimited2/StudioProjects/package-update/tutorial_coach_mark-1.2.13
+  tutorial_coach_mark:
+    git:
+      url: https://github.com/SamratAlShahriar/tutorial_coach_mark.git
+      ref: main
 
   share_plus: ^12.0.0
 
@@ -137,12 +137,12 @@ dependencies:
   flutter_contacts: ^1.1.9+2
 
   # for payment gateway integration
+#  flutter_sslcommerz:
+#    path: /Users/supreoxlimited2/StudioProjects/package-update/flutter_sslcommerz-2.3.6
   flutter_sslcommerz:
-    path: /Users/supreoxlimited2/StudioProjects/package-update/flutter_sslcommerz-2.3.6
-  #  flutter_sslcommerz:
-  #    git:
-  #      url: https://github.com/SamratAlShahriar/flutter_sslcommerz.git
-  #      ref: main
+    git:
+      url: https://github.com/SamratAlShahriar/flutter_sslcommerz.git
+      ref: main
 
   # for periodic task
   workmanager: ^0.9.0+3
