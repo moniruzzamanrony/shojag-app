@@ -3,6 +3,7 @@ import 'package:app/core/utils/extension/context_extension.dart';
 import 'package:app/core/utils/extension/number_extension.dart';
 import 'package:app/feature/alert/presentation/create/widget/add_form_text_field.dart';
 import 'package:app/feature/alert/presentation/create/widget/alert_add_location_widget.dart';
+import 'package:app/feature/alert/presentation/create/widget/audio_button_widget.dart';
 import 'package:app/feature/alert/presentation/create/widget/image_button_widget.dart';
 import 'package:app/feature/alert/presentation/create/widget/incident_search_widget.dart';
 import 'package:app/feature/alert/presentation/create/widget/info_notice_widget.dart';
@@ -54,6 +55,8 @@ class _AlertFormCommunityState extends State<AlertFormCommunity> {
         const ImageButtonWidget(),
         _itemGap20(),
         const VideoCaptureScreen(),
+        _itemGap20(),
+        const AudioButtonWidget(),
         _itemGap20(),
         // const ShareAlsoWidget(currentType: AlertType.community),
         const AlertAddButtonWidget(currentType: AlertType.community),

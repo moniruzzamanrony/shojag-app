@@ -40,6 +40,15 @@ class AlertAddProvider extends BaseProvider {
     notify();
   }
 
+  File? _selectedAudio;
+
+  File? get selectedAudio => _selectedAudio;
+
+  set selectedAudio(File? value) {
+    _selectedAudio = value;
+    notify();
+  }
+
   String? description;
   String? detailAddress;
   String? geoAddress;
