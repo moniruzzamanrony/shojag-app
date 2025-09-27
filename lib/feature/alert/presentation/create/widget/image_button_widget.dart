@@ -26,19 +26,24 @@ class ImageButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Selector<AlertAddProvider, File?>(
       selector: (_, provider) => provider.selectedImage,
-      builder: (_, value, __) => AnimatedSize(
-          duration: const Duration(milliseconds: 300),
-          alignment: Alignment.bottomCenter,
-          child: value == null
-              ? MediaUploadButtonWidget(
-                  hintText: context.language.captureOrUploadImage,
-                  icon: Icons.camera_alt_outlined,
-                  onTap: () => _showBottomSheet(context),
-                )
-              : MediaViewFrameWidget(
-                  child: Image.file(File(value.path)),
-                  onClose: () =>
-                      context.read<AlertAddProvider>().selectedImage = null)),
+      builder: (_, value, _) => AnimatedSize(
+        duration: const Duration(milliseconds: 300),
+        alignment: Alignment.bottomCenter,
+        child: value == null
+            ? MediaUploadButtonWidget(
+                hintText: context.language.captureOrUploadImage,
+                icon: Icons.camera_alt_outlined,
+                onTap: () {
+                  _pickImage(context, ImageSource.camera);
+                  //_showBottomSheet(context);
+                },
+              )
+            : MediaViewFrameWidget(
+                child: Image.file(File(value.path)),
+                onClose: () =>
+                    context.read<AlertAddProvider>().selectedImage = null,
+              ),
+      ),
     );
   }
 
@@ -56,16 +61,20 @@ class ImageButtonWidget extends StatelessWidget {
     File? image;
     if (pickedImage != null) {
       final tempPath = await FileHelper().temporaryDirectoryPath;
-      final outputFilePath = p.join(tempPath,
-          pickedImage.name.padLeft(pickedImage.name.length + 1, 'temp_'));
+      final outputFilePath = p.join(
+        tempPath,
+        pickedImage.name.padLeft(pickedImage.name.length + 1, 'temp_'),
+      );
 
       final compressedImageFile = File(outputFilePath);
 
       final resizedImage = await FlutterImageCompress.compressAndGetFile(
-          pickedImage.path, compressedImageFile.path,
-          minWidth: AppConstants.alertImagePreferredWidth,
-          minHeight: AppConstants.alertImagePreferredHeight,
-          quality: AppConstants.alertImagePreferredQuality);
+        pickedImage.path,
+        compressedImageFile.path,
+        minWidth: AppConstants.alertImagePreferredWidth,
+        minHeight: AppConstants.alertImagePreferredHeight,
+        quality: AppConstants.alertImagePreferredQuality,
+      );
       if (resizedImage != null) {
         image = File(resizedImage.path);
       }
@@ -90,9 +99,10 @@ class ImageButtonWidget extends StatelessWidget {
               Text(
                 context.language.selectAnOption,
                 style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.colorAppGrey),
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.colorAppGrey,
+                ),
               ),
               ListTile(
                 onTap: () {
@@ -102,17 +112,15 @@ class ImageButtonWidget extends StatelessWidget {
                 contentPadding: contentPadding,
                 title: Text(context.language.camera),
                 trailing: Container(
-                    padding: EdgeInsets.all(4.r),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(6.r),
-                    ),
-                    child: const Icon(Icons.camera_alt_outlined)),
+                  padding: EdgeInsets.all(4.r),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(6.r),
+                  ),
+                  child: const Icon(Icons.camera_alt_outlined),
+                ),
               ),
-              const Divider(
-                height: 0,
-                color: AppColors.colorGreyExtraLight,
-              ),
+              const Divider(height: 0, color: AppColors.colorGreyExtraLight),
               ListTile(
                 onTap: () {
                   context.pop();
@@ -121,12 +129,13 @@ class ImageButtonWidget extends StatelessWidget {
                 contentPadding: contentPadding,
                 title: Text(context.language.gallery),
                 trailing: Container(
-                    padding: EdgeInsets.all(4.r),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(6.r),
-                    ),
-                    child: const Icon(Icons.photo_size_select_actual_outlined)),
+                  padding: EdgeInsets.all(4.r),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(6.r),
+                  ),
+                  child: const Icon(Icons.photo_size_select_actual_outlined),
+                ),
               ),
               20.gapH,
             ],

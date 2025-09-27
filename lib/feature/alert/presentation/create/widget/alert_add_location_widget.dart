@@ -54,8 +54,8 @@ class AlertAddLocationWidget extends StatelessWidget {
               text: place,
               icon: Icons.my_location_outlined,
               onTap: () {
-                hideAppKeyboard(context);
-                _showLocationView(context);
+                /*hideAppKeyboard(context);
+                _showLocationView(context);*/
               },
             );
           },

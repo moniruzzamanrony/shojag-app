@@ -59,33 +59,40 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(Dimens.padding12),
         child: Column(
           children: [
-            Row(
+            /*Row(
               children: [
                 const Expanded(
-                    child: DottedLine(dashColor: AppColors.colorGreyLight)),
+                  child: DottedLine(dashColor: AppColors.colorGreyLight),
+                ),
                 Gap(Dimens.padding4),
-                Text(context.language.createAlert,
-                    style: TextStyle(
-                        fontSize: 12.sp, color: AppColors.colorAppGrey)),
+                Text(
+                  context.language.createAlert,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppColors.colorAppGrey,
+                  ),
+                ),
                 Gap(Dimens.padding4),
                 const Expanded(
-                    child: DottedLine(dashColor: AppColors.colorGreyLight)),
+                  child: DottedLine(dashColor: AppColors.colorGreyLight),
+                ),
               ],
             ),
-            Gap(Dimens.padding8),
+            Gap(Dimens.padding8),*/
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: Dimens.padding6,
               children: [
                 Expanded(
-                    child: HomeButtonWidget(
-                  key: TutorialKeys.communityButtonKey,
-                  backgroundColor: AppColors.communityCardColor,
-                  borderColor: AppColors.communityCardBorderColor,
-                  icon: Assets.citizenSvg,
-                  buttonText: context.language.community,
-                  buttonType: AlertType.community,
-                )),
+                  child: HomeButtonWidget(
+                    key: TutorialKeys.communityButtonKey,
+                    backgroundColor: AppColors.communityCardColor,
+                    borderColor: AppColors.communityCardBorderColor,
+                    icon: Assets.activeAlertSvg,
+                    buttonText: context.language.createAlert,
+                    buttonType: AlertType.community,
+                  ),
+                ),
                 /*Expanded(
                     child: HomeButtonWidget(
                   key: TutorialKeys.policeButtonKey,

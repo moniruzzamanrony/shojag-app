@@ -46,23 +46,20 @@ class HomeButtonWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          AspectRatio(
-            aspectRatio: 1,
-
-            child: Container(
-              height: 80.h,
-              decoration: BoxDecoration(
-                //color: backgroundColor,
-                border: Border.all(color: borderColor, width: 1.2),
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  DropLottieAnim(color: borderColor.shade(180)),
-                  SvgPicture.asset(icon, height: 32.h),
-                ],
-              ),
+          Container(
+            height: 70.h,
+            width: double.maxFinite,
+            decoration: BoxDecoration(
+              //color: backgroundColor,
+              border: Border.all(color: borderColor, width: 1.2),
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                DropLottieAnim(color: borderColor.shade(180)),
+                SvgPicture.asset(icon, height: 32.h),
+              ],
             ),
           ),
           Gap(Dimens.padding8),

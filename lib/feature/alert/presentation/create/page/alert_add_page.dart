@@ -51,7 +51,7 @@ class AlertAddPage extends StatelessWidget {
           children: [
             CustomAppBar(
                 title:
-                    context.language.createTypeNewAlert(type.title(context))),
+                    context.language.createAlert),
             Expanded(
                 child: CurvedBottomBackground(
               child: SingleChildScrollView(

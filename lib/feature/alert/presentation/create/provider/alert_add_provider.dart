@@ -6,7 +6,6 @@ import 'package:app/core/utils/resource/dependency_injection.dart';
 import 'package:app/feature/alert/domain/entity/incident_type_view_model.dart';
 import 'package:app/feature/alert/domain/usecase/alert_add_remote_use_case.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 
 /// Provider for the alert add page
@@ -32,11 +31,11 @@ class AlertAddProvider extends BaseProvider {
     notify();
   }
 
-  XFile? _selectedVideo;
+  File? _selectedVideo;
 
-  XFile? get selectedVideo => _selectedVideo;
+  File? get selectedVideo => _selectedVideo;
 
-  set selectedVideo(XFile? value) {
+  set selectedVideo(File? value) {
     _selectedVideo = value;
     notify();
   }
@@ -68,10 +67,11 @@ class AlertAddProvider extends BaseProvider {
 
   bool isAlertAdding = false;
 
-  Future<bool> addAlert(
-      {required int userId,
-      required String token,
-      required AlertType selectedPrimaryCategory}) async {
+  Future<bool> addAlert({
+    required int userId,
+    required String token,
+    required AlertType selectedPrimaryCategory,
+  }) async {
     if (isAlertAdding) return false;
     if (selectedPrimaryCategory == AlertType.ambulance) {
       customIncident = 'Ambulance Alert';
