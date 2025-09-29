@@ -18,7 +18,7 @@ class CitizenProfile extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PremiumPackageInfoWidget(), // only for citizen
+        //const PremiumPackageInfoWidget(), // only for citizen
         itemSeparator(),
         ProfileHeaderWidget(title: context.language.name),
         headerContentSeparator(),

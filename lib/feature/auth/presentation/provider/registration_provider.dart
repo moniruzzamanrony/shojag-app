@@ -17,7 +17,6 @@ import '../../domain/usecase/verify_otp_use_case.dart';
 import '../../domain/usecase/verify_phone_use_case.dart';
 
 class RegistrationProvider extends BaseProvider {
-
   final StringBuffer _errorMessage = StringBuffer();
 
   String? get errorMessage =>
@@ -121,8 +120,10 @@ class RegistrationProvider extends BaseProvider {
     return response.fold((l) => Future.error(l.message), (r) => r.id);
   }
 
-  Future<OtpVerifyIdAndTokenEntity?> verifyOtp(
-      {required String otp, required int tempId}) async {
+  Future<OtpVerifyIdAndTokenEntity?> verifyOtp({
+    required String otp,
+    required int tempId,
+  }) async {
     isOtpVerifying = true;
     notify();
 
@@ -167,7 +168,7 @@ class RegistrationProvider extends BaseProvider {
     required int tempId,
     required double latitude,
     required double longitude,
-    required int thanaId,
+    int? thanaId,
   }) async {
     _isRegistering = true;
     notify();
@@ -175,21 +176,22 @@ class RegistrationProvider extends BaseProvider {
     final registrationUseCase = getIt<RegistrationUseCase>();
 
     final param = RegistrationParams(
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        typeId: typeId,
-        gender: gender,
-        password: password,
-        token: tempToken,
-        policeId: policeId,
-        fireStation: organization,
-        hospitalOrAgency: organization,
-        deviceToken: deviceToken,
-        latitude: latitude,
-        longitude: longitude,
-        thanaId: thanaId,
-        tempId: tempId);
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      typeId: typeId,
+      gender: gender,
+      password: password,
+      token: tempToken,
+      policeId: policeId,
+      fireStation: organization,
+      hospitalOrAgency: organization,
+      deviceToken: deviceToken,
+      latitude: latitude,
+      longitude: longitude,
+      thanaId: thanaId,
+      tempId: tempId,
+    );
     final response = await registrationUseCase(param);
     _isRegistering = false;
     notify();

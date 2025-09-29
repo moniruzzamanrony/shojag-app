@@ -104,11 +104,11 @@ class RegButtonWidget extends StatelessWidget {
         return;
       }
 
-      final selectedThana = registrationProvider.selectedThana;
+      /*final selectedThana = registrationProvider.selectedThana;
       if (selectedUserType == UserType.police && selectedThana == null) {
         registrationProvider.setErrorMessage('Select your thana');
         return;
-      }
+      }*/
 
       final isTermsAndConditionAccepted =
           registrationProvider.acceptTermsAndCondition;
@@ -145,7 +145,7 @@ class RegButtonWidget extends StatelessWidget {
               lastName: lastName,
               email: email,
               typeId: selectedType.id,
-              thanaId: selectedThana?.id ?? 0,
+              //thanaId: selectedThana?.id ?? 0,
               longitude: latitude,
               latitude: longitude,
               deviceToken: deviceToken,

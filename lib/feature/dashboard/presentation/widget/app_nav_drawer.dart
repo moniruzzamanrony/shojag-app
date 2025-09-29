@@ -64,7 +64,9 @@ class AppNavDrawer extends StatelessWidget {
                       Assets.shojagPoweredByLogoEnSvg,
                       width: 150.w,
                       colorFilter: const ColorFilter.mode(
-                          AppColors.colorBlack, BlendMode.srcIn),
+                        AppColors.colorBlack,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     const Spacer(),
                     InkWell(
@@ -72,13 +74,14 @@ class AppNavDrawer extends StatelessWidget {
                         _closeDrawer(context);
                       },
                       child: CircleAvatar(
-                          backgroundColor: AppColors.colorAppRed,
-                          radius: 14.r,
-                          child: Icon(
-                            Icons.close,
-                            color: AppColors.colorWhite,
-                            size: 14.r,
-                          )),
+                        backgroundColor: AppColors.colorAppRed,
+                        radius: 14.r,
+                        child: Icon(
+                          Icons.close,
+                          color: AppColors.colorWhite,
+                          size: 14.r,
+                        ),
+                      ),
                     ),
                     16.gapW,
                   ],
@@ -97,9 +100,11 @@ class AppNavDrawer extends StatelessWidget {
                       context
                           .read<DashboardProvider>()
                           .pageController
-                          .animateToPage(0,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.ease);
+                          .animateToPage(
+                            0,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
                     }
                   },
                 ),
@@ -107,10 +112,21 @@ class AppNavDrawer extends StatelessWidget {
                   _MainMenu(
                     buttonText: context.language.newAlert,
                     leadingIcon: Icons.add,
-                    hasTrailingIcon: true,
+                    hasTrailingIcon: false,
                     menu: MainMenu.alertCreate,
                     isSelected: value == MainMenu.alertCreate,
-                    submenus: [
+                    onTap: () async {
+                      await context.read<IncidentProvider>().getIncidentList(
+                        categoryId: AlertType.community.id,
+                      );
+                      if (context.mounted) {
+                        context.goNamed(
+                          Routes.alertAdd,
+                          extra: AlertType.community,
+                        );
+                      }
+                    },
+                    /*submenus: [
                       _SubMenu(
                           buttonText: context.language.community,
                           leadingIcon: Icons.people,
@@ -168,7 +184,7 @@ class AppNavDrawer extends StatelessWidget {
                                   extra: AlertType.ambulance);
                             }
                           }),
-                    ],
+                    ],*/
                   ),
                 _MainMenu(
                   buttonText: context.language.alertList,
@@ -182,9 +198,9 @@ class AppNavDrawer extends StatelessWidget {
                         buttonText: context.language.myAlerts,
                         onTap: () {
                           _closeDrawer(context);
-                          context
-                              .read<AlertListProvider>()
-                              .updateListType(ListType.myAlerts);
+                          context.read<AlertListProvider>().updateListType(
+                            ListType.myAlerts,
+                          );
                           context.goNamed(Routes.alertList);
                         },
                       ),
@@ -192,9 +208,9 @@ class AppNavDrawer extends StatelessWidget {
                       buttonText: context.language.respondedAlerts,
                       onTap: () {
                         _closeDrawer(context);
-                        context
-                            .read<AlertListProvider>()
-                            .updateListType(ListType.responded);
+                        context.read<AlertListProvider>().updateListType(
+                          ListType.responded,
+                        );
                         context.goNamed(Routes.alertList);
                       },
                     ),
@@ -202,9 +218,9 @@ class AppNavDrawer extends StatelessWidget {
                       buttonText: context.language.activeAlerts,
                       onTap: () {
                         _closeDrawer(context);
-                        context
-                            .read<AlertListProvider>()
-                            .updateListType(ListType.active);
+                        context.read<AlertListProvider>().updateListType(
+                          ListType.active,
+                        );
                         context.goNamed(Routes.alertList);
                       },
                     ),
@@ -212,9 +228,9 @@ class AppNavDrawer extends StatelessWidget {
                       buttonText: context.language.closedAlerts,
                       onTap: () {
                         _closeDrawer(context);
-                        context
-                            .read<AlertListProvider>()
-                            .updateListType(ListType.closed);
+                        context.read<AlertListProvider>().updateListType(
+                          ListType.closed,
+                        );
                         context.goNamed(Routes.alertList);
                       },
                       isLastItem: true,
@@ -252,7 +268,8 @@ class AppNavDrawer extends StatelessWidget {
                   onTap: () async {
                     _closeDrawer(context);
                     if (await canLaunchUrl(
-                        Uri.parse(AppConstants.privacyPolicyUrl))) {
+                      Uri.parse(AppConstants.privacyPolicyUrl),
+                    )) {
                       launchUrl(Uri.parse(AppConstants.privacyPolicyUrl));
                     }
                   },
@@ -275,7 +292,7 @@ class AppNavDrawer extends StatelessWidget {
                   onTap: () {},
                 ),
                 80.gapH,
-                if (context.isCitizen)
+                /*if (context.isCitizen)
                   Selector<PremiumProvider, bool>(
                     selector: (_, provider) =>
                         provider.premiumEntity.isValidPremiumUser,
@@ -329,7 +346,7 @@ class AppNavDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
               ],
             ),
           ),
@@ -418,8 +435,10 @@ class _MainMenuState extends State<_MainMenu>
     duration = const Duration(milliseconds: 350);
 
     expandController = AnimationController(vsync: this, duration: duration);
-    animation =
-        CurvedAnimation(parent: expandController, curve: Curves.fastOutSlowIn);
+    animation = CurvedAnimation(
+      parent: expandController,
+      curve: Curves.fastOutSlowIn,
+    );
     isExpanded = widget.isSelected;
 
     _runExpandCheck();
@@ -447,7 +466,8 @@ class _MainMenuState extends State<_MainMenu>
     return Column(
       children: [
         InkWell(
-          onTap: widget.onTap ??
+          onTap:
+              widget.onTap ??
               () {
                 final navMenuProvider = context.read<NavMenuProvider>();
                 if (navMenuProvider.selectedMainMenu != widget.menu) {
@@ -485,8 +505,9 @@ class _MainMenuState extends State<_MainMenu>
                     duration: duration,
                     child: Icon(
                       Icons.arrow_forward_ios,
-                      color:
-                          widget.isSelected ? selectedColor : unselectedColor,
+                      color: widget.isSelected
+                          ? selectedColor
+                          : unselectedColor,
                       size: Dimens.iconSize20,
                     ),
                   ),
@@ -496,10 +517,11 @@ class _MainMenuState extends State<_MainMenu>
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
-                      color:
-                          widget.isSelected ? selectedColor : unselectedColor,
+                      color: widget.isSelected
+                          ? selectedColor
+                          : unselectedColor,
                     ),
-                  )
+                  ),
               ],
             ),
           ),
@@ -519,7 +541,7 @@ class _MainMenuState extends State<_MainMenu>
               mainAxisSize: MainAxisSize.min,
               children: widget.submenus!,
             ),
-          )
+          ),
       ],
     );
   }
@@ -531,12 +553,13 @@ class _SubMenu extends StatelessWidget {
   final void Function()? onTap;
   final IconData? leadingIcon;
 
-  const _SubMenu(
-      {super.key,
-      required this.buttonText,
-      this.isLastItem = false,
-      this.onTap,
-      this.leadingIcon});
+  const _SubMenu({
+    super.key,
+    required this.buttonText,
+    this.isLastItem = false,
+    this.onTap,
+    this.leadingIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -574,14 +597,16 @@ class _SubMenu extends StatelessWidget {
                             width: 8.r,
                             height: 8.r,
                             decoration: const BoxDecoration(
-                                color: AppColors.colorGrey,
-                                shape: BoxShape.circle),
+                              color: AppColors.colorGrey,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                           Container(
                             width: 10.w,
                             height: 1.r,
-                            decoration:
-                                const BoxDecoration(color: AppColors.colorGrey),
+                            decoration: const BoxDecoration(
+                              color: AppColors.colorGrey,
+                            ),
                           ),
                         ],
                       ),
@@ -594,7 +619,7 @@ class _SubMenu extends StatelessWidget {
                             thickness: isLastItem ? 0 : 1.r,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   )
                 else
@@ -607,9 +632,10 @@ class _SubMenu extends StatelessWidget {
                 Text(
                   buttonText,
                   style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.colorGrey),
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.colorGrey,
+                  ),
                 ),
               ],
             ),
